@@ -53,13 +53,14 @@
    ──────────────────────────────────────────────────────────── */
 function doPost(e) {
   try {
-    var sheet = _getOrCreateLeadsSheet();
+    var sheet  = _getOrCreateLeadsSheet();
+    var params = (e && e.parameter) ? e.parameter : {};
 
     sheet.appendRow([
-      new Date(),                   /* A: Timestamp  */
-      e.parameter.name   || '',     /* B: Name       */
-      e.parameter.phone  || '',     /* C: Phone      */
-      e.parameter.source || '',     /* D: Source     */
+      new Date(),              /* A: Timestamp  */
+      params.name   || '',     /* B: Name       */
+      params.phone  || '',     /* C: Phone      */
+      params.source || '',     /* D: Source     */
     ]);
 
   } catch (err) {
