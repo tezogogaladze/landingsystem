@@ -24,7 +24,7 @@
 /* ── SET THIS to your Apps Script deployment URL ───────────
    Leave as null to stay in local / development mode.
    ──────────────────────────────────────────────────────────── */
-const SHEETS_API_URL = null;
+const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbw0D7jLw5mOl90-tIkBpgQugiQ7IqDi7rC9uoRmfWYl17T-7gwv6qFx7hvSOyd0el1SwA/exec';
 // const SHEETS_API_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
 
 
