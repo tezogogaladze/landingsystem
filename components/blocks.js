@@ -69,7 +69,8 @@ const Blocks = (() => {
 
     const visual = m.image
       ? `<div class="block-hero__image-wrap">
-           <img src="${e(m.image)}" alt="${e(c.title)}" class="block-hero__image">
+           <img src="${e(m.image)}" alt="${e(c.title)}" class="block-hero__image"
+                fetchpriority="high" decoding="async">
          </div>`
       : `<div class="block-hero__img-placeholder">პროდუქტის ვიზუალი</div>`;
 
