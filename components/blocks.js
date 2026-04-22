@@ -33,16 +33,28 @@ const Blocks = (() => {
   /* ── Shared partials ──────────────────────────────────────── */
 
   function btn(label, anchor) {
-    return `<a href="${e(anchor)}" class="btn btn--primary btn--full btn--lg">${e(label)}</a>`;
+    return `
+      <a href="${e(anchor)}" class="btn btn--primary btn--full btn--lg">
+        ${e(label)}<span class="btn__arrow" aria-hidden="true"> →</span>
+      </a>`;
   }
 
   function priceDisplay(price) {
     if (!price) return '';
-    const cur = e(price.currency || '');
+    const cur      = e(price.currency || '');
+    const oldLabel = e(price.oldLabel || 'Old price');
+    const newLabel = e(price.newLabel || 'New price');
     return `
       <div class="price-display">
-        ${price.old ? `<span class="price-display__old">${e(price.old)}${cur}</span>` : ''}
-        <span class="price-display__new">${e(price.new)}${cur}</span>
+        ${price.old ? `
+          <div class="price-display__row price-display__row--old">
+            <span class="price-display__label">${oldLabel}</span>
+            <span class="price-display__old">${e(price.old)}${cur}</span>
+          </div>` : ''}
+        <div class="price-display__row price-display__row--main">
+          <span class="price-display__label price-display__label--main">${newLabel}</span>
+          <span class="price-display__new">${e(price.new)}${cur}</span>
+        </div>
       </div>`;
   }
 
