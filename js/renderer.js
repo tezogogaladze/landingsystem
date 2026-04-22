@@ -115,7 +115,7 @@ const Renderer = (() => {
 
     const btn   = form.querySelector('button[type="submit"]');
     const label = btn.textContent;
-    btn.textContent = 'Submitting…';
+    btn.textContent = 'იგზავნება...';
     btn.disabled    = true;
 
     /* ── TODO: replace with real fetch ───────────────────── */
@@ -137,7 +137,7 @@ const Renderer = (() => {
         const msg = document.createElement('p');
         msg.id        = errId;
         msg.className = 'form-error-msg';
-        msg.textContent = 'This field is required.';
+        msg.textContent = 'ეს ველი სავალდებულოა.';
         input.parentNode.appendChild(msg);
       }
     });
@@ -148,11 +148,11 @@ const Renderer = (() => {
     const wrap = form.closest('.block-form');
     const cont = wrap && wrap.querySelector('.lp-container');
     if (!cont) return;
-    cont.innerHTML = `
+      cont.innerHTML = `
       <div class="block-form__success">
         <div class="block-form__success-icon">✅</div>
-        <h3>Order received!</h3>
-        <p>We will call you within 15&nbsp;minutes to confirm.</p>
+        <h3>შეკვეთა მიღებულია!</h3>
+        <p>15&nbsp;წუთში დაგიკავშირდებით დასადასტურებლად.</p>
       </div>`;
   }
 

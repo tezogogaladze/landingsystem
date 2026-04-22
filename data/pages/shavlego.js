@@ -1,167 +1,197 @@
 /* ============================================================
-   data/pages/shavlego.js
-
-   Page data for the Shavlego electric shaver landing page.
-   Registered in data/registry.js under the key "shavlego".
-
+   data/pages/shavlego.js — შავლეგო
    To preview: index.html?page=shavlego
    ============================================================ */
 
 window.PAGE_DATA = {
 
   meta: {
-    title:        'Shavlego | Order Now — 99₾',
-    description:  'Innovative 5-blade electric shaver. Free delivery. Pay on receipt.',
+    title:        'შავლეგო | შეუკვეთე ახლა — 99₾',
+    description:  'ინოვაციური 5-თავაკიანი ელექტრო საპარსი. უფასო მიწოდება. გადახდა მიღებისას.',
     primaryColor: '#e63946',
-    lang:         'en'
+    lang:         'ka'
   },
 
   blocks: [
 
     {
       type:     'hero',
-      badge:    'Special offer — limited time',
+      badge:    'სპეციალური შეთავაზება — შეზღუდული დრო',
       image:    null,
-      title:    'Shavlego',
-      subtitle: 'Innovative 5-blade shaving system',
-      price:    { old: '136', new: '99', currency: '₾' },
-      cta:      { label: 'Order Now — 99₾', anchor: '#order-form' }
+      title:    'შავლეგო',
+      subtitle: 'გაპარსვის ინოვაციური პროცესი',
+      price: {
+        old:      '136',
+        new:      '99',
+        currency: '₾',
+        oldLabel: 'ძველი ფასი',
+        newLabel: 'ახალი ფასი'
+      },
+      cta: { label: 'შეკვეთის გაფორმება', anchor: '#order-form' }
     },
 
     {
       type:  'countdown',
       key:   'shavlego',
-      label: 'Offer ends in',
+      label: 'აქციის დასრულებამდე დარჩა',
       hours: 24
     },
 
     {
       type:  'features-list',
-      title: 'Why choose Shavlego?',
+      title: 'რატომ შავლეგო?',
       items: [
-        { icon: '⚡', text: 'Shaves beard & hair in 90 seconds flat' },
-        { icon: '💧', text: 'Cordless and fully waterproof — use anywhere' },
-        { icon: '🛡️', text: 'Anti-allergy 5-blade head — no cuts, no irritation' },
-        { icon: '✂️', text: '2-in-1: beard AND hair trimming in one device' }
+        { icon: '⚡', text: 'შავლეგო მხოლოდ 90 წამში პარსავს წვერსა და თმას' },
+        { icon: '💧', text: 'უსადენო და წყალგამძლე — გამოიყენე ნებისმიერ ადგილას' },
+        { icon: '🛡️', text: 'ანტიალერგიული 5-თავაკიანი სისტემა — ნაკაწრები და გაღიზიანება გამორიცხულია' },
+        { icon: '✂️', text: '2-ში-1: წვერი და თმა — ერთი მოწყობილობა' }
       ]
     },
 
     {
       type:    'cta',
-      label:   'Order Now — 99₾',
+      label:   'შეკვეთის გაფორმება',
       anchor:  '#order-form',
-      subtext: 'Free delivery to your door'
+      subtext: 'უფასო მიწოდება თქვენს კართან'
     },
 
     {
       type:     'pain-solution',
-      question: 'Tired of razor burns that ruin your morning?',
-      answer:   "Shavlego's 5 flexible anti-allergy blades adapt perfectly to the contours of your face, eliminating skin irritation and ingrown hairs. Your skin stays smooth and healthy — every single day.",
+      question: 'გაღიზიანება და ნაკაწრები ყოველ დილას? გაიცანი შავლეგო!',
+      answer:   'შავლეგოს 5 მოქნილი ანტიალერგიული თავაკი სრულყოფილად ერგება შენი სახის კონტურებს და სამუდამოდ გაათავისუფლებს კანის გაღიზიანებისა და ჩაზრდილი თმებისგან. კანი ყოველ დღე გლუვი და ჯანსაღი დარჩება.',
       image:    null
     },
 
     {
       type:     'pain-solution',
-      question: 'Running late because shaving takes too long?',
-      answer:   'Shavlego shaves 5× faster than a traditional razor. Get a clean, professional result in just 90 seconds — so you are always on time.',
+      question: 'სამსახურში გაგვიანდება, წვერის გაპარსვა კი ყოველ დილას დროს გჭამს?',
+      answer:   'შავლეგო 5-ჯერ უფრო სწრაფად პარსავს, ვიდრე ჩვეულებრივი სამართებელი. მიიღე სუფთა, პროფესიონალური შედეგი მხოლოდ 90 წამში — ყოველთვის დროულად!',
       image:    null
     },
 
     {
       type:     'pain-solution',
-      question: 'Travel often and tired of bulky shavers?',
-      answer:   'Shavlego is cordless, waterproof, and compact. Toss it in your bag and shave wherever you are — hotel bathroom, gym, airport. Anywhere.',
+      question: 'ხშირად მიემგზავრები და ძველი, მოუხერხებელი საპარსი გიშლის ხელს?',
+      answer:   'შავლეგო უსადენო, წყალგამძლე და კომპაქტურია. ჩადე ჩანთაში და გაიპარსე სადაც გინდა — სასტუმრო, სპორტდარბაზი, ნებისმიერი ადგილი.',
       image:    null
     },
 
     {
       type:  'text-section',
-      title: 'Ergonomic design — 3× more control',
-      body:  "Shavlego's grip is engineered to fit your hand perfectly. The ergonomic handle gives you 3× more control compared to standard shavers, ensuring a precise and comfortable shave every time.",
+      title: 'ერგონომიული დიზაინი — 3-ჯერ მეტი კონტროლი',
+      body:  'შავლეგოს ხელსაჭიდი შექმნილია შენი ხელისთვის. ერგონომიული ფორმა 3-ჯერ მეტ კონტროლს გაძლევს ჩვეულებრივ საპარსთან შედარებით — ზუსტი და კომფორტული გაპარსვა ყოველ ჯერზე.',
       align: 'left'
     },
 
     {
       type:    'cta',
-      label:   'Order Shavlego — 99₾',
+      label:   'შეუკვეთე შავლეგო — 99₾',
       anchor:  '#order-form',
-      subtext: 'Limited stock — do not miss out'
+      subtext: 'შეზღუდული მარაგი — ნუ გამოტოვებ'
     },
 
     {
       type:     'pain-solution',
-      question: 'Hair grows back every 2 weeks but salon visits are expensive?',
-      answer:   "Shavlego trims hair just as well as it shaves a beard. Its flexible blades let you get a better-than-salon result at home, in half the time — no appointment needed.",
+      question: 'ყოველ 2 კვირაში თმა გეზრდება, სალონში სიარული კი ძვირი ჯდება?',
+      answer:   'შავლეგო იდეალურია თმის შეჭრისთვისაც. მოქნილი თავაკები სახლიდან გაუსვლელად გაძლევს სალონზე უკეთეს შედეგს — 2-ჯერ სწრაფად.',
       image:    null
     },
 
     {
       type:  'text-section',
-      title: 'A confident man is an attractive man',
-      body:  "Shavlego's innovative anti-allergy blades leave your skin smooth, attractive, and soft — the foundation of the confidence every man deserves.",
+      title: 'თავდაჯერებული მამაკაცი — მიმზიდველი მამაკაცი',
+      body:  'შავლეგოს ინოვაციური ანტიალერგიული თავაკები შენს კანს გლუვს, მიმზიდველსა და რბილს ხდის — ეს არის თავდაჯერებულობის საფუძველი, რომელიც ყველა ქალმა იცის.',
       align: 'center'
     },
 
     {
       type:  'benefits-grid',
-      title: 'Product advantages',
+      title: 'პროდუქტის უპირატესობები',
       items: [
-        { number: '01', title: 'Speed',   text: 'Full shave in 90 seconds.' },
-        { number: '02', title: '2-in-1',  text: 'Works for beard and hair.' },
-        { number: '03', title: 'Safety',  text: 'Flexible blades, zero cuts.' },
-        { number: '04', title: 'Comfort', text: 'Cordless, waterproof, compact.' }
+        { number: '01', title: 'სიჩქარე',      text: 'სრული გაპარსვა 90 წამში.' },
+        { number: '02', title: '2-ში-1',        text: 'წვერი და თმა — ერთი მოწყობილობა.' },
+        { number: '03', title: 'უსაფრთხოება',  text: 'მოქნილი თავაკები, ნულოვანი ნაჭრები.' },
+        { number: '04', title: 'კომფორტი',      text: 'უსადენო, წყალგამძლე, კომპაქტური.' }
       ]
     },
 
     {
       type:    'cta',
-      label:   'Get Shavlego Now — 99₾',
+      label:   'შეიძინე შავლეგო — 99₾',
       anchor:  '#order-form',
       subtext: null
     },
 
     {
       type:  'video-section',
-      title: 'See it in action',
+      title: 'ნახე მოქმედებაში',
       src:   null
     },
 
     {
       type:  'specs-list',
-      title: 'Technical specifications',
+      title: 'პროდუქტის მახასიათებლები',
       items: [
-        'Battery life: 200 minutes per charge',
-        'Dimensions: 7.62 × 7.62 × 6.35 cm',
-        'Weight: 209 g',
-        'Includes: product box + USB charger',
-        'Country of origin: PRC'
+        'ბატარეის მუშაობის დრო: 200 წუთი ერთ დატენვაზე',
+        'ზომები: 7.62 × 7.62 × 6.35 სმ',
+        'წონა: 209 გ',
+        'მოყვება: შეფუთვის ყუთი + USB დამტენი',
+        'წარმოების ქვეყანა: PRC'
       ]
     },
 
     {
       type:  'testimonials',
-      title: 'What customers say',
+      title: 'მომხმარებელთა გამოხმაურებები',
       items: [
-        { rating: 5, text: 'Best shaver I have ever owned. Takes 90 seconds and leaves my skin perfectly smooth. No irritation at all.',         author: 'David M.'  },
-        { rating: 5, text: 'I was skeptical but this thing is incredible. The anti-allergy blades make a real difference — zero redness.',       author: 'George T.' },
-        { rating: 5, text: 'The 2-in-1 feature is a game changer. I use it for both beard and hair now. Saves time and money every week.',       author: 'Nika B.'   }
+        {
+          rating: 5,
+          text:   'საუკეთესო საპარსი, რაც ოდესმე გამომიყენებია. 90 წამი და კანი სრულყოფილად გლუვია. გაღიზიანება სრულად გაქრა.',
+          author: 'დავით მ.'
+        },
+        {
+          rating: 5,
+          text:   'სკეპტიკური ვიყავი, მაგრამ ეს ნამდვილად გასაოცარია. ანტიალერგიული თავაკები სხვაობას ნამდვილად ქმნის — ნულოვანი სიწითლე.',
+          author: 'გიორგი თ.'
+        },
+        {
+          rating: 5,
+          text:   '2-ში-1 ფუნქცია — ნამდვილი აღმოჩენა. ახლა ვიყენებ წვერისა და თმის ორივეს. ყოველ კვირა დრო და ფული მეზოგება.',
+          author: 'ნიკა ბ.'
+        }
       ]
     },
 
     {
       type:  'process-steps',
-      title: 'How to order',
+      title: 'როგორ ხდება შეკვეთის გაფორმება?',
       items: [
-        { icon: '📝', title: 'Fill the form',    text: 'Enter your name and phone number in the form below.' },
-        { icon: '📞', title: 'We call you',       text: 'Our operator calls within 15 minutes to confirm address and delivery time.' },
-        { icon: '🚚', title: 'We deliver',        text: 'We bring the order to your preferred address — free of charge.' },
-        { icon: '💳', title: 'Pay on delivery',   text: 'Pay only after you receive the product — cash or card. No prepayment required.' }
+        {
+          icon:  '📝',
+          title: 'ავსებ ფორმას',
+          text:  'შეიყვანე შენი სახელი და ტელეფონის ნომერი ქვემოთ მოცემულ ფორმაში.'
+        },
+        {
+          icon:  '📞',
+          title: 'გიკავშირდება ოპერატორი',
+          text:  'ჩვენი მენეჯერი 15 წუთში გიკავშირდება მისამართისა და მიწოდების დროის დასაზუსტებლად.'
+        },
+        {
+          icon:  '🚚',
+          title: 'მოგაქვს შეკვეთა',
+          text:  'შეკვეთას მოგიტანთ სასურველ მისამართზე — მიტანა უფასოა.'
+        },
+        {
+          icon:  '💳',
+          title: 'იხდი მიღებისას',
+          text:  'გადახდა მხოლოდ შეკვეთის მიღების შემდეგ — ქეშით ან ბარათით. წინასწარი გადახდა არ სჭირდება.'
+        }
       ]
     },
 
     {
       type:    'cta',
-      label:   'Order Now — 99₾',
+      label:   'შეკვეთის გაფორმება',
       anchor:  '#order-form',
       subtext: null
     },
@@ -169,21 +199,21 @@ window.PAGE_DATA = {
     {
       type:        'form',
       id:          'order-form',
-      title:       'Place your order',
-      subtitle:    "Fill in your details and we'll contact you within 15 minutes",
+      title:       'შეავსე საკონტაქტო ინფორმაცია',
+      subtitle:    'შეავსე ფორმა და 15 წუთში დაგიკავშირდებით',
       fields: [
-        { type: 'text', name: 'name',  placeholder: 'Your name',    required: true, autocomplete: 'name' },
-        { type: 'tel',  name: 'phone', placeholder: 'Phone number', required: true, autocomplete: 'tel'  }
+        { type: 'text', name: 'name',  placeholder: 'შენი სახელი',       required: true, autocomplete: 'name' },
+        { type: 'tel',  name: 'phone', placeholder: 'ტელეფონის ნომერი',  required: true, autocomplete: 'tel'  }
       ],
-      submitLabel: 'Submit order',
-      note:        'Pay only on delivery. No credit card or prepayment required.'
+      submitLabel: 'შეკვეთის გაფორმება',
+      note:        'გადახდა მხოლოდ შეკვეთის მიღებისას. ქეში ან ბარათი. წინასწარი გადახდა არ სჭირდება.'
     },
 
     {
       type:     'callback-cta',
-      title:    'Want us to call you?',
-      subtitle: "Submit the form above and we'll call back within 15 minutes.",
-      label:    'Go to order form',
+      title:    'გინდა ზარი?',
+      subtitle: 'შეავსე ფორმა და 15 წუთში გადმოგირეკავთ.',
+      label:    'გადადი ფორმაზე',
       anchor:   '#order-form'
     }
 

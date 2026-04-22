@@ -42,8 +42,8 @@ const Blocks = (() => {
   function priceDisplay(price) {
     if (!price) return '';
     const cur      = e(price.currency || '');
-    const oldLabel = e(price.oldLabel || 'Old price');
-    const newLabel = e(price.newLabel || 'New price');
+    const oldLabel = e(price.oldLabel || 'ძველი ფასი');
+    const newLabel = e(price.newLabel || 'ახალი ფასი');
     return `
       <div class="price-display">
         ${price.old ? `
@@ -64,7 +64,7 @@ const Blocks = (() => {
       ? `<div class="block-hero__image-wrap">
            <img src="${e(b.image)}" alt="${e(b.title)}" class="block-hero__image">
          </div>`
-      : `<div class="block-hero__img-placeholder">Product visual</div>`;
+      : `<div class="block-hero__img-placeholder">პროდუქტის ვიზუალი</div>`;
 
     return `
       <section class="block block-hero">
@@ -86,28 +86,28 @@ const Blocks = (() => {
     return `
       <section class="block block-countdown block--dark">
         <div class="lp-container">
-          <p class="block-countdown__label">${e(b.label || 'Offer ends in')}</p>
+          <p class="block-countdown__label">${e(b.label || 'აქციის დასრულებამდე დარჩა')}</p>
           <div class="countdown-timer"
                data-countdown-key="${key}"
                data-countdown-hours="${hours}">
             <div class="countdown-unit">
               <span class="countdown-unit__val" data-unit="d">00</span>
-              <span class="countdown-unit__label">Days</span>
+              <span class="countdown-unit__label">დღე</span>
             </div>
             <span class="countdown-sep">:</span>
             <div class="countdown-unit">
               <span class="countdown-unit__val" data-unit="h">00</span>
-              <span class="countdown-unit__label">Hours</span>
+              <span class="countdown-unit__label">სთ</span>
             </div>
             <span class="countdown-sep">:</span>
             <div class="countdown-unit">
               <span class="countdown-unit__val" data-unit="m">00</span>
-              <span class="countdown-unit__label">Min</span>
+              <span class="countdown-unit__label">წთ</span>
             </div>
             <span class="countdown-sep">:</span>
             <div class="countdown-unit">
               <span class="countdown-unit__val" data-unit="s">00</span>
-              <span class="countdown-unit__label">Sec</span>
+              <span class="countdown-unit__label">წმ</span>
             </div>
           </div>
         </div>
@@ -192,7 +192,7 @@ const Blocks = (() => {
   function imageSection(b) {
     const inner = b.src
       ? `<img src="${e(b.src)}" alt="${e(b.alt || '')}" class="block-image__img" loading="lazy">`
-      : `<div class="block-image__placeholder">Product image</div>`;
+      : `<div class="block-image__placeholder">პროდუქტის სურათი</div>`;
     return `
       <section class="block block-image">
         <div class="lp-container">
@@ -207,11 +207,11 @@ const Blocks = (() => {
     const inner = b.src
       ? `<div class="block-video__embed-wrap">
            <iframe src="${e(b.src)}" allowfullscreen loading="lazy"
-                   title="${e(b.title || 'Product video')}"></iframe>
+                   title="${e(b.title || 'პროდუქტის ვიდეო')}"></iframe>
          </div>`
       : `<div class="block-video__placeholder">
            <span class="block-video__placeholder-icon" aria-hidden="true">▶</span>
-           <span class="block-video__placeholder-label">Video coming soon</span>
+           <span class="block-video__placeholder-label">ვიდეო მალე</span>
          </div>`;
     return `
       <section class="block block-video">
@@ -243,7 +243,7 @@ const Blocks = (() => {
       const stars = '★'.repeat(n) + '☆'.repeat(5 - n);
       return `
         <div class="testimonial-card">
-          <div class="testimonial-card__stars" aria-label="${n} out of 5 stars">${stars}</div>
+          <div class="testimonial-card__stars" aria-label="${n} 5-დან">${stars}</div>
           <p class="testimonial-card__text">"${e(item.text)}"</p>
           <p class="testimonial-card__author">— ${e(item.author)}</p>
         </div>`;
@@ -302,7 +302,7 @@ const Blocks = (() => {
           <form class="block-form__form" novalidate>
             ${fields}
             <button type="submit" class="btn btn--primary btn--full btn--lg">
-              ${e(b.submitLabel || 'Submit')}
+              ${e(b.submitLabel || 'გაგზავნა')}
             </button>
           </form>
           ${b.note ? `<p class="block-form__note">${e(b.note)}</p>` : ''}
