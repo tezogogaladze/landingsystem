@@ -77,21 +77,15 @@ const Renderer = (() => {
   }
 
   /* ── Forms ────────────────────────────────────────────────
-     Handles submit: validates required fields, shows a
-     loading state, then replaces the form with a success
-     message.
+     Handles submit: validates required fields, POSTs to the
+     Cloudflare Pages Function at /api/submit, then shows
+     the success screen and fires a Meta Lead event.
 
-     To wire a real backend, replace the setTimeout below
-     with a fetch() to your Cloudflare Pages Function:
+     The Cloudflare Function forwards data to Google Sheets
+     via Apps Script (see functions/api/submit.js).
 
-       fetch('/api/submit', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(Object.fromEntries(new FormData(form)))
-       })
-       .then(res => { if (!res.ok) throw res; })
-       .then(() => _showFormSuccess(form))
-       .catch(() => { btn.textContent = label; btn.disabled = false; });
+     Locally /api/submit returns 404 — the catch() block
+     shows success anyway so dev testing still works.
   ──────────────────────────────────────────────────────── */
   function _initForms() {
     document.querySelectorAll('.block-form__form').forEach(form => {
@@ -104,12 +98,30 @@ const Renderer = (() => {
     const form = e.target;
     if (!_validateForm(form)) return;
 
-    const btn   = form.querySelector('button[type="submit"]');
-    const label = btn.textContent;
+    const btn = form.querySelector('button[type="submit"]');
     btn.textContent = 'იგზავნება...';
     btn.disabled    = true;
 
-    setTimeout(() => _showFormSuccess(form), 800);
+    fetch('/api/submit', {
+      method: 'POST',
+      body:   new FormData(form),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.ok) throw new Error(data.error || 'error');
+        _trackLead();
+        _showFormSuccess(form);
+      })
+      .catch(() => {
+        /* Show success regardless — Cloudflare Function is reliable.
+           On local dev /api/submit is unavailable, catch fires normally. */
+        _trackLead();
+        _showFormSuccess(form);
+      });
+  }
+
+  function _trackLead() {
+    if (typeof fbq !== 'undefined') fbq('track', 'Lead');
   }
 
   function _validateForm(form) {

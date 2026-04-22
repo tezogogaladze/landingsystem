@@ -365,9 +365,8 @@ window.PAGE_DATA = {
         submitLabel: '✅ შეკვეთა — 99₾',
         note:        '🔒 შენი მონაცემები დაცულია. გარე სერვისებს არ ვუგზავნით.',
         fields: [
-          { name: 'name',  type: 'text', placeholder: 'შენი სახელი',       required: true,  autocomplete: 'given-name' },
-          { name: 'phone', type: 'tel',  placeholder: 'ტელეფონის ნომერი',  required: true,  autocomplete: 'tel'        },
-          { name: 'city',  type: 'text', placeholder: 'ქალაქი',             required: false, autocomplete: 'address-level2' },
+          { name: 'name',  type: 'text', placeholder: 'შენი სახელი',      required: true, autocomplete: 'given-name' },
+          { name: 'phone', type: 'tel',  placeholder: 'ტელეფონის ნომერი', required: true, autocomplete: 'tel'        },
         ],
       },
       media:  {},
