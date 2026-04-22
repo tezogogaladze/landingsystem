@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Landing page" />
+    <title>Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a href="/" class="logo" aria-label="Home">YourBrand</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#cta" class="btn btn--outline">Get started</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <span class="badge">Now available</span>
+          <h1 id="hero-headline" class="hero__title">
+            The simplest way to<br />
+            <span class="highlight">achieve your goal</span>
+          </h1>
+          <p class="hero__sub">
+            A clear, one-sentence description of what you offer and who it is for.
+            Keep it short, benefit-driven, and specific.
+          </p>
+          <div class="hero__actions">
+            <a href="#cta" class="btn btn--primary">Start for free</a>
+            <a href="#how-it-works" class="btn btn--ghost">See how it works</a>
+          </div>
+        </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="placeholder-visual">
+            <span>Product visual</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SOCIAL PROOF ===== -->
+    <section class="social-proof" aria-label="Trusted by">
+      <div class="container">
+        <p class="social-proof__label">Trusted by teams at</p>
+        <ul class="logo-strip" role="list">
+          <li class="logo-item">Company A</li>
+          <li class="logo-item">Company B</li>
+          <li class="logo-item">Company C</li>
+          <li class="logo-item">Company D</li>
+          <li class="logo-item">Company E</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="features-title">Everything you need</h2>
+          <p>Built for speed, designed for scale.</p>
+        </div>
+        <ul class="feature-grid" role="list">
+          <li class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">⚡</div>
+            <h3>Fast by default</h3>
+            <p>No configuration needed. Works out of the box with zero overhead.</p>
+          </li>
+          <li class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">🔒</div>
+            <h3>Secure</h3>
+            <p>End-to-end encryption and best-practice security built in from day one.</p>
+          </li>
+          <li class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">🔧</div>
+            <h3>Flexible</h3>
+            <p>Adapts to your workflow — not the other way around.</p>
+          </li>
+          <li class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">📈</div>
+            <h3>Scalable</h3>
+            <p>Grows with you from day one to one million users.</p>
+          </li>
+          <li class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">🌐</div>
+            <h3>Global reach</h3>
+            <p>Deployed on the edge for sub-100ms response times worldwide.</p>
+          </li>
+          <li class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">🎯</div>
+            <h3>Focused</h3>
+            <p>Designed to solve one problem exceptionally well.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-it-works section" id="how-it-works" aria-labelledby="hiw-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="hiw-title">How it works</h2>
+          <p>Three steps and you're live.</p>
+        </div>
+        <ol class="steps" role="list">
+          <li class="step">
+            <div class="step__number" aria-hidden="true">1</div>
+            <div class="step__body">
+              <h3>Sign up</h3>
+              <p>Create your account in under 60 seconds. No credit card required.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step__number" aria-hidden="true">2</div>
+            <div class="step__body">
+              <h3>Configure</h3>
+              <p>Connect your tools and configure the workflow that fits your team.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step__number" aria-hidden="true">3</div>
+            <div class="step__body">
+              <h3>Launch</h3>
+              <p>Go live instantly. Monitor results in real time from your dashboard.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIAL ===== -->
+    <section class="testimonial section" aria-label="Testimonial">
+      <div class="container">
+        <figure class="testimonial__card">
+          <blockquote>
+            <p>
+              "This product changed how our team operates. We saved 10 hours a week
+              and our conversion rate doubled within the first month."
+            </p>
+          </blockquote>
+          <figcaption>
+            <strong>Jane Smith</strong>
+            <span>Head of Growth, Acme Corp</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section section" id="cta" aria-labelledby="cta-title">
+      <div class="container cta-section__inner">
+        <h2 id="cta-title">Ready to get started?</h2>
+        <p>Join thousands of teams already using the platform.</p>
+        <form class="cta-form" novalidate aria-label="Sign up form">
+          <label for="email" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          />
+          <button type="submit" class="btn btn--primary">Get early access</button>
+        </form>
+        <p class="cta-section__note">No credit card required. Cancel anytime.</p>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <span class="logo">YourBrand</span>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </nav>
+        <p class="copyright">&copy; <span id="year"></span> YourBrand. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
