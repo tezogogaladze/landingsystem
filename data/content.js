@@ -17,7 +17,7 @@ window.PAGE_DATA = {
 
   meta: {
     title:       'შავლეგო — გაპარსვის პრო კომპლექტი',
-    description: '5-თავაკიანი გაპარსვის სისტემა, რომელიც თქვენს სახეს სრულ სიმრბილეს ანიჭებს.',
+    description: '5-თავაკიანი გაპარსვის სისტემა, რომელიც თქვენს სახეს სრულ სირბილეს ანიჭებს.',
     lang:        'ka',
   },
 
@@ -40,7 +40,7 @@ window.PAGE_DATA = {
         priceNew:      '99',
         priceCurrency: '₾',
         priceOldLabel: 'ძველი ფასი',
-        priceNewLabel: 'ახლა მხოლოდ',
+        priceNewLabel: 'ახალი ფასი',
         ctaLabel:      'შეკვეთის გაფორმება',
         ctaAnchor:     '#order-form',
       },
@@ -53,7 +53,7 @@ window.PAGE_DATA = {
       type:    'countdown',
       order:   2,
       enabled: true,
-      content: { label: '⏳ ფასდაკლება სრულდება — გამოიყენე სანამ არ გვიანა' },
+      content: { label: '⏳ ფასდაკლება სრულდება — გამოიყენე სანამ ხელმისაწვდომია' },
       media:   {},
       config:  { key: 'shavlego', hours: 24 },
     },
