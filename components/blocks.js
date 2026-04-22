@@ -192,7 +192,10 @@ const Blocks = (() => {
   function imageSection(b) {
     const inner = b.src
       ? `<img src="${e(b.src)}" alt="${e(b.alt || '')}" class="block-image__img" loading="lazy">`
-      : `<div class="block-image__placeholder">პროდუქტის სურათი</div>`;
+      : `<div class="block-image__placeholder">
+           <span class="block-image__placeholder-icon" aria-hidden="true">📷</span>
+           <span class="block-image__placeholder-text">${e(b.alt || 'პროდუქტის სურათი')}</span>
+         </div>`;
     return `
       <section class="block block-image">
         <div class="lp-container">
@@ -310,6 +313,36 @@ const Blocks = (() => {
       </section>`;
   }
 
+  /* ── contact-info ─────────────────────────────────────────── */
+  function contactInfo(b) {
+    const items = (b.items || []).map(item => {
+      const val = item.href
+        ? `<a href="${e(item.href)}" class="block-contact__value block-contact__value--link">${e(item.value)}</a>`
+        : `<span class="block-contact__value">${e(item.value)}</span>`;
+      return `
+        <li class="block-contact__item">
+          ${item.icon ? `<span class="block-contact__icon" aria-hidden="true">${item.icon}</span>` : ''}
+          <div class="block-contact__body">
+            ${item.label ? `<span class="block-contact__label">${e(item.label)}</span>` : ''}
+            ${val}
+          </div>
+        </li>`;
+    }).join('');
+
+    const links = (b.links || []).map(link =>
+      `<a href="${e(link.href || '#')}" class="block-contact__link">${e(link.label)}</a>`
+    ).join('');
+
+    return `
+      <section class="block block-contact block--dark">
+        <div class="lp-container">
+          ${b.title ? `<p class="block-contact__title">${e(b.title)}</p>` : ''}
+          ${items ? `<ul class="block-contact__list">${items}</ul>` : ''}
+          ${links ? `<hr class="block-contact__divider"><nav class="block-contact__links">${links}</nav>` : ''}
+        </div>
+      </section>`;
+  }
+
   /* ── callback-cta ─────────────────────────────────────────── */
   function callbackCta(b) {
     return `
@@ -340,6 +373,7 @@ const Blocks = (() => {
     'process-steps':  processSteps,
     'form':           form,
     'callback-cta':   callbackCta,
+    'contact-info':   contactInfo,
   };
 
   return {

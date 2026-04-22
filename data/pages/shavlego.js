@@ -14,6 +14,7 @@ window.PAGE_DATA = {
 
   blocks: [
 
+    /* ── 1. Hero ──────────────────────────────────────────── */
     {
       type:     'hero',
       badge:    'სპეციალური შეთავაზება — შეზღუდული დრო',
@@ -30,6 +31,7 @@ window.PAGE_DATA = {
       cta: { label: 'შეკვეთის გაფორმება', anchor: '#order-form' }
     },
 
+    /* ── 2. Countdown ─────────────────────────────────────── */
     {
       type:  'countdown',
       key:   'shavlego',
@@ -37,6 +39,15 @@ window.PAGE_DATA = {
       hours: 24
     },
 
+    /* ── 3. Image: product reveal ─────────────────────────── */
+    {
+      type:    'image-section',
+      src:     null,
+      alt:     'შავლეგო — 5-თავაკიანი სისტემა, პროდუქტის ახლო კადრი',
+      caption: null
+    },
+
+    /* ── 4. Features ──────────────────────────────────────── */
     {
       type:  'features-list',
       title: 'რატომ შავლეგო?',
@@ -48,6 +59,15 @@ window.PAGE_DATA = {
       ]
     },
 
+    /* ── 5. Image: lifestyle — man shaving ────────────────── */
+    {
+      type:    'image-section',
+      src:     null,
+      alt:     'კაცი პარსავს შავლეგოთი — სწრაფი და კომფორტული გაპარსვა',
+      caption: null
+    },
+
+    /* ── 6. CTA #1 ────────────────────────────────────────── */
     {
       type:    'cta',
       label:   'შეკვეთის გაფორმება',
@@ -55,6 +75,7 @@ window.PAGE_DATA = {
       subtext: 'უფასო მიწოდება თქვენს კართან'
     },
 
+    /* ── 7. Pain-solution #1 ──────────────────────────────── */
     {
       type:     'pain-solution',
       question: 'გაღიზიანება და ნაკაწრები ყოველ დილას? გაიცანი შავლეგო!',
@@ -62,6 +83,15 @@ window.PAGE_DATA = {
       image:    null
     },
 
+    /* ── 8. Image: smooth skin close-up ──────────────────── */
+    {
+      type:    'image-section',
+      src:     null,
+      alt:     'გლუვი კანი გაპარსვის შემდეგ — ნულოვანი გაღიზიანება, ანტიალერგიული ეფექტი',
+      caption: null
+    },
+
+    /* ── 9. Pain-solution #2 ──────────────────────────────── */
     {
       type:     'pain-solution',
       question: 'სამსახურში გაგვიანდება, წვერის გაპარსვა კი ყოველ დილას დროს გჭამს?',
@@ -69,6 +99,7 @@ window.PAGE_DATA = {
       image:    null
     },
 
+    /* ── 10. Pain-solution #3 ─────────────────────────────── */
     {
       type:     'pain-solution',
       question: 'ხშირად მიემგზავრები და ძველი, მოუხერხებელი საპარსი გიშლის ხელს?',
@@ -76,6 +107,15 @@ window.PAGE_DATA = {
       image:    null
     },
 
+    /* ── 11. Image: product in travel bag ─────────────────── */
+    {
+      type:    'image-section',
+      src:     null,
+      alt:     'შავლეგო მოგზაურობის ჩანთაში — კომპაქტური, ნებისმიერ ადგილას',
+      caption: null
+    },
+
+    /* ── 12. Text section: ergonomic ──────────────────────── */
     {
       type:  'text-section',
       title: 'ერგონომიული დიზაინი — 3-ჯერ მეტი კონტროლი',
@@ -83,6 +123,15 @@ window.PAGE_DATA = {
       align: 'left'
     },
 
+    /* ── 13. Image: ergonomic grip ────────────────────────── */
+    {
+      type:    'image-section',
+      src:     null,
+      alt:     'ხელი შავლეგოს ხელსაჭიდზე — ერგონომიული ფორმა, 3-ჯერ მეტი კონტროლი',
+      caption: null
+    },
+
+    /* ── 14. CTA #2 ───────────────────────────────────────── */
     {
       type:    'cta',
       label:   'შეუკვეთე შავლეგო — 99₾',
@@ -90,6 +139,7 @@ window.PAGE_DATA = {
       subtext: 'შეზღუდული მარაგი — ნუ გამოტოვებ'
     },
 
+    /* ── 15. Pain-solution #4 ─────────────────────────────── */
     {
       type:     'pain-solution',
       question: 'ყოველ 2 კვირაში თმა გეზრდება, სალონში სიარული კი ძვირი ჯდება?',
@@ -97,6 +147,7 @@ window.PAGE_DATA = {
       image:    null
     },
 
+    /* ── 16. Text section: confident man ─────────────────── */
     {
       type:  'text-section',
       title: 'თავდაჯერებული მამაკაცი — მიმზიდველი მამაკაცი',
@@ -104,6 +155,7 @@ window.PAGE_DATA = {
       align: 'center'
     },
 
+    /* ── 17. Benefits grid ────────────────────────────────── */
     {
       type:  'benefits-grid',
       title: 'პროდუქტის უპირატესობები',
@@ -115,6 +167,15 @@ window.PAGE_DATA = {
       ]
     },
 
+    /* ── 18. Image: result — confident man ────────────────── */
+    {
+      type:    'image-section',
+      src:     null,
+      alt:     'გაპარსვის შედეგი — გლუვი, თავდაჯერებული სახე',
+      caption: null
+    },
+
+    /* ── 19. CTA #3 ───────────────────────────────────────── */
     {
       type:    'cta',
       label:   'შეიძინე შავლეგო — 99₾',
@@ -122,12 +183,14 @@ window.PAGE_DATA = {
       subtext: null
     },
 
+    /* ── 20. Video ────────────────────────────────────────── */
     {
       type:  'video-section',
       title: 'ნახე მოქმედებაში',
       src:   null
     },
 
+    /* ── 21. Specs ────────────────────────────────────────── */
     {
       type:  'specs-list',
       title: 'პროდუქტის მახასიათებლები',
@@ -140,6 +203,7 @@ window.PAGE_DATA = {
       ]
     },
 
+    /* ── 22. Testimonials ─────────────────────────────────── */
     {
       type:  'testimonials',
       title: 'მომხმარებელთა გამოხმაურებები',
@@ -162,6 +226,7 @@ window.PAGE_DATA = {
       ]
     },
 
+    /* ── 23. Process steps ────────────────────────────────── */
     {
       type:  'process-steps',
       title: 'როგორ ხდება შეკვეთის გაფორმება?',
@@ -189,6 +254,7 @@ window.PAGE_DATA = {
       ]
     },
 
+    /* ── 24. CTA #4 ───────────────────────────────────────── */
     {
       type:    'cta',
       label:   'შეკვეთის გაფორმება',
@@ -196,25 +262,54 @@ window.PAGE_DATA = {
       subtext: null
     },
 
+    /* ── 25. Lead capture form ────────────────────────────── */
     {
       type:        'form',
       id:          'order-form',
       title:       'შეავსე საკონტაქტო ინფორმაცია',
       subtitle:    'შეავსე ფორმა და 15 წუთში დაგიკავშირდებით',
       fields: [
-        { type: 'text', name: 'name',  placeholder: 'შენი სახელი',       required: true, autocomplete: 'name' },
-        { type: 'tel',  name: 'phone', placeholder: 'ტელეფონის ნომერი',  required: true, autocomplete: 'tel'  }
+        { type: 'text', name: 'name',  placeholder: 'შენი სახელი',      required: true, autocomplete: 'name' },
+        { type: 'tel',  name: 'phone', placeholder: 'ტელეფონის ნომერი', required: true, autocomplete: 'tel'  }
       ],
       submitLabel: 'შეკვეთის გაფორმება',
       note:        'გადახდა მხოლოდ შეკვეთის მიღებისას. ქეში ან ბარათი. წინასწარი გადახდა არ სჭირდება.'
     },
 
+    /* ── 26. Contact info (replaces callback-cta) ─────────── */
     {
-      type:     'callback-cta',
-      title:    'გინდა ზარი?',
-      subtitle: 'შეავსე ფორმა და 15 წუთში გადმოგირეკავთ.',
-      label:    'გადადი ფორმაზე',
-      anchor:   '#order-form'
+      type:  'contact-info',
+      title: 'კომპანიის ინფორმაცია',
+      items: [
+        {
+          icon:  '📍',
+          label: 'მისამართი',
+          value: 'საქართველო, თბილისი, რუსთაველის გამზ. 10'
+        },
+        {
+          icon:  '📞',
+          label: 'ცხელი ხაზი',
+          value: '+995 555 79 35 58',
+          href:  'tel:+995555793558'
+        },
+        {
+          icon:  '✉️',
+          label: 'ელ-ფოსტა',
+          value: 'Shavlego.one@gmail.com',
+          href:  'mailto:Shavlego.one@gmail.com'
+        },
+        {
+          icon:  '🌐',
+          label: 'ვებსაიტი',
+          value: 'www.shavlego.one',
+          href:  'https://www.shavlego.one/'
+        }
+      ],
+      links: [
+        { label: 'წესები და პირობები',          href: '#' },
+        { label: 'კონფიდენციალობის პოლიტიკა',  href: '#' },
+        { label: 'კონტაქტი',                    href: 'mailto:Shavlego.one@gmail.com' }
+      ]
     }
 
   ]
