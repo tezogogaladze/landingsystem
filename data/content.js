@@ -44,7 +44,7 @@ window.PAGE_DATA = {
         ctaLabel:      'შეკვეთის გაფორმება',
         ctaAnchor:     '#order-form',
       },
-      media:  { image: null },
+      media:  { image: 'https://picsum.photos/seed/shavlego1/800/600' },
       config: {},
     },
 
@@ -64,7 +64,7 @@ window.PAGE_DATA = {
       order:   3,
       enabled: true,
       content: { alt: 'შავლეგო — 5-თავაკიანი სისტემა, პროდუქტის ახლო კადრი' },
-      media:   { image: null },
+      media:   { image: 'https://picsum.photos/seed/shavlego2/800/500' },
       config:  {},
     },
 
@@ -107,7 +107,7 @@ window.PAGE_DATA = {
       order:   6,
       enabled: true,
       content: { alt: 'კომფორტული გაპარსვა — შავლეგო სახმარებლად' },
-      media:   { image: null },
+      media:   { image: 'https://picsum.photos/seed/shavlego3/800/500' },
       config:  {},
     },
 
@@ -120,7 +120,7 @@ window.PAGE_DATA = {
         question: '😩 გაპარსვის შემდეგ გწვა და ახასიათებს გამოწითლება?',
         answer:   'შავლეგოს 5 თავაკი ამცირებს სიხშირეს — ნაკლები გადასვლა, ნაკლები გაღიზიანება. ალოე ვერა კი კანს მყისიერ სიმშვიდეს ანიჭებს.',
       },
-      media:  { image: null },
+      media:  {},
       config: {},
     },
 
@@ -133,7 +133,7 @@ window.PAGE_DATA = {
         question: '💸 ფულს ხარჯავ სალონზე რეგულარულად?',
         answer:   '99₾-ით — ერთი საათობრივი ვიზიტის ფასად — ხარისხიანი გაპარსვა სახლში შეგიძლია. ყოველ კვირა, ყოველ დღე.',
       },
-      media:  { image: null },
+      media:  {},
       config: {},
     },
 
@@ -175,7 +175,7 @@ window.PAGE_DATA = {
       order:   11,
       enabled: true,
       content: { alt: '5 თავაკი ახლოდან — სიმახვილე, რომელიც ჩანს' },
-      media:   { image: null },
+      media:   { image: 'https://picsum.photos/seed/shavlego4/800/500' },
       config:  {},
     },
 
@@ -211,7 +211,7 @@ window.PAGE_DATA = {
         question: '⏰ დრო გიფასდება — გაპარსვაში ტლანქ დრო კარგავ?',
         answer:   'FlexGlide® ტექნოლოგია კონტურებს ავტომატურად ეგუება — ნაკლები ფრთხილი მოძრაობა, ნაკლები ვარჯიში, სწრაფი შედეგი. სულ 2 წუთი.',
       },
-      media:  { image: null },
+      media:  {},
       config: {},
     },
 
@@ -241,7 +241,7 @@ window.PAGE_DATA = {
       order:   16,
       enabled: true,
       content: { alt: 'შავლეგო შეფუთვაში — სუფთა, სასაჩუქრე ვარიანტი' },
-      media:   { image: null },
+      media:   { image: 'https://picsum.photos/seed/shavlego5/800/500' },
       config:  {},
     },
 
@@ -254,7 +254,7 @@ window.PAGE_DATA = {
         question: '🤔 გიჭირს სწორი სამართებელის არჩევა?',
         answer:   'შავლეგო Gillette Fusion-ის ტიპთან თავსებადია — უკვე გაქვს ყველაფერი, რაც საჭიროა. უბრალოდ გამოიცვალე თავაკი.',
       },
-      media:  { image: null },
+      media:  {},
       config: {},
     },
 
@@ -313,7 +313,7 @@ window.PAGE_DATA = {
       order:   21,
       enabled: true,
       content: { alt: 'გაპარსვის შედეგი — გლუვი, გაღიზიანების გარეშე' },
-      media:   { image: null },
+      media:   { image: 'https://picsum.photos/seed/shavlego6/800/500' },
       config:  {},
     },
 
@@ -350,7 +350,7 @@ window.PAGE_DATA = {
       order:   24,
       enabled: true,
       content: { alt: 'შავლეგო — ათასობით კმაყოფილი მომხმარებელი მთელ საქართველოში' },
-      media:   { image: null },
+      media:   { image: 'https://picsum.photos/seed/shavlego7/800/500' },
       config:  {},
     },
 
