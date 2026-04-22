@@ -18,15 +18,19 @@
 
     <!--
       Script load order is intentional — each file depends on the one above it:
-        utils.js      → shared helpers (countdown, escape)
-        blocks.js     → block renderers (uses Utils)
-        page.js       → page data (window.PAGE_DATA)
-        renderer.js   → rendering engine (uses Blocks, Utils, PAGE_DATA)
-        app.js        → boot (calls Renderer)
+        utils.js      → shared helpers (countdown, color, escape)
+        blocks.js     → 14 block renderers (uses Utils)
+        registry.js   → page registry: slug → file path map
+        renderer.js   → rendering engine (uses Blocks + Utils)
+        app.js        → boot: resolves slug, loads page file, calls Renderer
+
+      Page data files (data/pages/*.js) are NOT loaded here.
+      app.js injects them dynamically at runtime based on ?page=slug.
+      index.html never needs to change when switching pages.
     -->
     <script src="js/utils.js"></script>
     <script src="components/blocks.js"></script>
-    <script src="data/page.js"></script>
+    <script src="data/registry.js"></script>
     <script src="js/renderer.js"></script>
     <script src="js/app.js"></script>
   </body>
