@@ -1,50 +1,34 @@
 /* ============================================================
-   data/pages/shavlego.js — Page data: Shavlego
+   data/content.js — Page content
 
-   Schema quick-reference:
-   ┌──────────────────────────────────────────────────────────┐
-   │  PAGE LEVEL (maps to "Pages" sheet in Google Sheets)     │
-   │    slug, meta.*, theme.*, settings.*                     │
-   │                                                          │
-   │  BLOCK LEVEL (maps to "Blocks" sheet)                    │
-   │    id, type, order, enabled                              │
-   │    content.*  →  editorial copy / text                   │
-   │    media.*    →  asset URLs (replace null with real URL) │
-   │    config.*   →  technical / type-specific options       │
-   │                                                          │
-   │  ITEM ARRAYS (maps to "Items" sheet with block_id FK)    │
-   │    content.items, content.fields, content.links          │
-   └──────────────────────────────────────────────────────────┘
+   Edit this file to change any text, prices, blocks, or
+   contact details on the landing page.
+
+   Each block has:
+     type    — which template to use (see components/blocks.js)
+     order   — render position (1 = first on page)
+     enabled — set to false to hide a block without deleting it
+     content — all text / copy fields
+     media   — image or video URLs (null = placeholder shown)
+     config  — technical options (form ID, countdown settings)
    ============================================================ */
 
 window.PAGE_DATA = {
-
-  /* ── Page-level (→ "Pages" sheet row) ─────────────────── */
-  slug: 'shavlego',
 
   meta: {
     title:       'შავლეგო — გაპარსვის პრო კომპლექტი',
     description: '5-თავაკიანი გაპარსვის სისტემა, რომელიც თქვენს სახეს სრულ სიმრბილეს ანიჭებს.',
     lang:        'ka',
-    favicon:     null,
   },
 
   theme: {
     primaryColor: '#e63946',
   },
 
-  settings: {
-    currency:   '₾',
-    ctaAnchor:  '#order-form',
-  },
-
-
-  /* ── Blocks (→ "Blocks" sheet rows + "Items" sheet rows) ─ */
   blocks: [
 
     /* 01 — Hero ─────────────────────────────────────────── */
     {
-      id:      'shv_hero',
       type:    'hero',
       order:   1,
       enabled: true,
@@ -60,47 +44,32 @@ window.PAGE_DATA = {
         ctaLabel:      'შეკვეთის გაფორმება',
         ctaAnchor:     '#order-form',
       },
-      media: {
-        image: null,   /* → replace with product hero image URL */
-      },
+      media:  { image: null },
       config: {},
     },
 
     /* 02 — Countdown ────────────────────────────────────── */
     {
-      id:      'shv_countdown',
       type:    'countdown',
       order:   2,
       enabled: true,
-      content: {
-        label: '⏳ ფასდაკლება სრულდება — გამოიყენე სანამ არ გვიანა',
-      },
-      media: {},
-      config: {
-        key:   'shavlego',
-        hours: 24,
-      },
+      content: { label: '⏳ ფასდაკლება სრულდება — გამოიყენე სანამ არ გვიანა' },
+      media:   {},
+      config:  { key: 'shavlego', hours: 24 },
     },
 
-    /* 03 — Product image 1 (intro) ──────────────────────── */
+    /* 03 — Product image 1 ──────────────────────────────── */
     {
-      id:      'shv_img_01',
       type:    'image-section',
       order:   3,
       enabled: true,
-      content: {
-        alt:     'შავლეგო — 5-თავაკიანი სისტემა, პროდუქტის ახლო კადრი',
-        caption: null,
-      },
-      media: {
-        image: null,   /* → product close-up photo */
-      },
-      config: {},
+      content: { alt: 'შავლეგო — 5-თავაკიანი სისტემა, პროდუქტის ახლო კადრი' },
+      media:   { image: null },
+      config:  {},
     },
 
-    /* 04 — Features list ────────────────────────────────── */
+    /* 04 — Features ─────────────────────────────────────── */
     {
-      id:      'shv_features',
       type:    'features-list',
       order:   4,
       enabled: true,
@@ -114,13 +83,12 @@ window.PAGE_DATA = {
           { icon: '✅', text: 'ჰიპოალერგიული — მგრძნობიარე კანისთვის შემოწმებული' },
         ],
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
     /* 05 — CTA 1 ────────────────────────────────────────── */
     {
-      id:      'shv_cta_01',
       type:    'cta',
       order:   5,
       enabled: true,
@@ -129,29 +97,22 @@ window.PAGE_DATA = {
         anchor:  '#order-form',
         subtext: 'უფასო მიწოდება მთელ საქართველოში',
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
-    /* 06 — Product image 2 (in-use lifestyle) ───────────── */
+    /* 06 — Product image 2 ──────────────────────────────── */
     {
-      id:      'shv_img_02',
       type:    'image-section',
       order:   6,
       enabled: true,
-      content: {
-        alt:     'კომფორტული გაპარსვა — შავლეგო სახმარებლად',
-        caption: null,
-      },
-      media: {
-        image: null,   /* → lifestyle / in-use photo */
-      },
-      config: {},
+      content: { alt: 'კომფორტული გაპარსვა — შავლეგო სახმარებლად' },
+      media:   { image: null },
+      config:  {},
     },
 
     /* 07 — Pain / solution 1 ────────────────────────────── */
     {
-      id:      'shv_ps_01',
       type:    'pain-solution',
       order:   7,
       enabled: true,
@@ -159,13 +120,12 @@ window.PAGE_DATA = {
         question: '😩 გაპარსვის შემდეგ გწვა და ახასიათებს გამოწითლება?',
         answer:   'შავლეგოს 5 თავაკი ამცირებს სიხშირეს — ნაკლები გადასვლა, ნაკლები გაღიზიანება. ალოე ვერა კი კანს მყისიერ სიმშვიდეს ანიჭებს.',
       },
-      media: { image: null },
+      media:  { image: null },
       config: {},
     },
 
     /* 08 — Pain / solution 2 ────────────────────────────── */
     {
-      id:      'shv_ps_02',
       type:    'pain-solution',
       order:   8,
       enabled: true,
@@ -173,32 +133,30 @@ window.PAGE_DATA = {
         question: '💸 ფულს ხარჯავ სალონზე რეგულარულად?',
         answer:   '99₾-ით — ერთი საათობრივი ვიზიტის ფასად — ხარისხიანი გაპარსვა სახლში შეგიძლია. ყოველ კვირა, ყოველ დღე.',
       },
-      media: { image: null },
+      media:  { image: null },
       config: {},
     },
 
-    /* 09 — Benefits grid ────────────────────────────────── */
+    /* 09 — Benefits ─────────────────────────────────────── */
     {
-      id:      'shv_benefits',
       type:    'benefits-grid',
       order:   9,
       enabled: true,
       content: {
         title: 'რას იღებ 99₾-ად',
         items: [
-          { number: '5X',  title: 'უფრო სუფთა კვეთა',     text: '5 თავაკი ერთდროულად — ტყვია-გამტარი სიზუსტე' },
-          { number: '3×',  title: 'ნაკლები გაღიზიანება',  text: 'ხახვი მინიმალური — კანი ბედნიერი' },
-          { number: '21+', title: 'დღე ერთ შაშხანაზე',    text: 'სამ კვირამდე ეკონომიური გამოყენება' },
-          { number: '0',   title: 'ვიზიტი სალონში',       text: 'სახლიდან გაუსვლელად — პროფესიული შედეგი' },
+          { number: '5X',  title: 'უფრო სუფთა კვეთა',    text: '5 თავაკი ერთდროულად — ტყვია-გამტარი სიზუსტე' },
+          { number: '3×',  title: 'ნაკლები გაღიზიანება', text: 'ხახვი მინიმალური — კანი ბედნიერი' },
+          { number: '21+', title: 'დღე ერთ შაშხანაზე',   text: 'სამ კვირამდე ეკონომიური გამოყენება' },
+          { number: '0',   title: 'ვიზიტი სალონში',      text: 'სახლიდან გაუსვლელად — პროფესიული შედეგი' },
         ],
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
     /* 10 — CTA 2 ────────────────────────────────────────── */
     {
-      id:      'shv_cta_02',
       type:    'cta',
       order:   10,
       enabled: true,
@@ -207,44 +165,32 @@ window.PAGE_DATA = {
         anchor:  '#order-form',
         subtext: 'მარაგი შეზღუდულია — ნუ გადადებ',
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
-    /* 11 — Product image 3 (detail / blades) ────────────── */
+    /* 11 — Product image 3 ──────────────────────────────── */
     {
-      id:      'shv_img_03',
       type:    'image-section',
       order:   11,
       enabled: true,
-      content: {
-        alt:     '5 თავაკი ახლოდან — სიმახვილე, რომელიც ჩანს',
-        caption: null,
-      },
-      media: {
-        image: null,   /* → blade detail macro photo */
-      },
-      config: {},
+      content: { alt: '5 თავაკი ახლოდან — სიმახვილე, რომელიც ჩანს' },
+      media:   { image: null },
+      config:  {},
     },
 
     /* 12 — Video ────────────────────────────────────────── */
     {
-      id:      'shv_video',
       type:    'video-section',
       order:   12,
       enabled: true,
-      content: {
-        title: '🎬 ნახე სად განსხვავდება',
-      },
-      media: {
-        video: null,   /* → YouTube/Vimeo embed URL */
-      },
-      config: {},
+      content: { title: '🎬 ნახე სად განსხვავდება' },
+      media:   { video: null },
+      config:  {},
     },
 
-    /* 13 — Text section (brand story) ───────────────────── */
+    /* 13 — Brand story ──────────────────────────────────── */
     {
-      id:      'shv_txt_01',
       type:    'text-section',
       order:   13,
       enabled: true,
@@ -252,13 +198,12 @@ window.PAGE_DATA = {
         title: 'ჩვენ ვართ შავლეგო',
         body:  'გაპარსვა არ უნდა ტკიობდეს. ჩვენი 5-თავაკიანი სისტემა შეიქმნა იმ ადამიანებისთვის, ვისთვისაც სიმრბილე ისეთივე მნიშვნელოვანია, როგორც სტილი. ყოველ დილა — შენი.',
       },
-      media: {},
-      config: { align: null },
+      media:  {},
+      config: {},
     },
 
     /* 14 — Pain / solution 3 ────────────────────────────── */
     {
-      id:      'shv_ps_03',
       type:    'pain-solution',
       order:   14,
       enabled: true,
@@ -266,13 +211,12 @@ window.PAGE_DATA = {
         question: '⏰ დრო გიფასდება — გაპარსვაში ტლანქ დრო კარგავ?',
         answer:   'FlexGlide® ტექნოლოგია კონტურებს ავტომატურად ეგუება — ნაკლები ფრთხილი მოძრაობა, ნაკლები ვარჯიში, სწრაფი შედეგი. სულ 2 წუთი.',
       },
-      media: { image: null },
+      media:  { image: null },
       config: {},
     },
 
-    /* 15 — Specs list ───────────────────────────────────── */
+    /* 15 — Specs ────────────────────────────────────────── */
     {
-      id:      'shv_specs',
       type:    'specs-list',
       order:   15,
       enabled: true,
@@ -287,29 +231,22 @@ window.PAGE_DATA = {
           'თავსებადი: Gillette Fusion-ის ტიპთან',
         ],
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
-    /* 16 — Product image 4 (packaging) ─────────────────── */
+    /* 16 — Product image 4 ──────────────────────────────── */
     {
-      id:      'shv_img_04',
       type:    'image-section',
       order:   16,
       enabled: true,
-      content: {
-        alt:     'შავლეგო შეფუთვაში — სუფთა, სასაჩუქრე ვარიანტი',
-        caption: null,
-      },
-      media: {
-        image: null,   /* → packaging / gift shot */
-      },
-      config: {},
+      content: { alt: 'შავლეგო შეფუთვაში — სუფთა, სასაჩუქრე ვარიანტი' },
+      media:   { image: null },
+      config:  {},
     },
 
     /* 17 — Pain / solution 4 ────────────────────────────── */
     {
-      id:      'shv_ps_04',
       type:    'pain-solution',
       order:   17,
       enabled: true,
@@ -317,48 +254,30 @@ window.PAGE_DATA = {
         question: '🤔 გიჭირს სწორი სამართებელის არჩევა?',
         answer:   'შავლეგო Gillette Fusion-ის ტიპთან თავსებადია — უკვე გაქვს ყველაფერი, რაც საჭიროა. უბრალოდ გამოიცვალე თავაკი.',
       },
-      media: { image: null },
+      media:  { image: null },
       config: {},
     },
 
     /* 18 — Testimonials ─────────────────────────────────── */
     {
-      id:      'shv_reviews',
       type:    'testimonials',
       order:   18,
       enabled: true,
       content: {
         title: '⭐ ნამდვილი მომხმარებლები',
         items: [
-          {
-            text:   'პირველი გამოყენებიდანვე შეიგრძნობა განსხვავება. კანი არ გწვავს, არ წითლდება.',
-            author: 'გ. ბ., თბილისი',
-            rating: 5,
-          },
-          {
-            text:   'სამ კვირაში ჯერ გამოცვლა არ დამჭირვებია. ეკონომიური და ეფექტური.',
-            author: 'ლ. კ., ბათუმი',
-            rating: 5,
-          },
-          {
-            text:   'ჩუქება ვაჩუქე ქმარს — ეხლა ჩემი ვერ ასვენებს 😄',
-            author: 'ნ. მ., თბილისი',
-            rating: 5,
-          },
-          {
-            text:   'ახლო მეგობარმა ურჩია — ახლა მეც ჩემს მეგობრებს ვურჩევ.',
-            author: 'ვ. დ., ქუთაისი',
-            rating: 5,
-          },
+          { text: 'პირველი გამოყენებიდანვე შეიგრძნობა განსხვავება. კანი არ გწვავს, არ წითლდება.',   author: 'გ. ბ., თბილისი',  rating: 5 },
+          { text: 'სამ კვირაში ჯერ გამოცვლა არ დამჭირვებია. ეკონომიური და ეფექტური.',               author: 'ლ. კ., ბათუმი',   rating: 5 },
+          { text: 'ჩუქება ვაჩუქე ქმარს — ეხლა ჩემი ვერ ასვენებს 😄',                              author: 'ნ. მ., თბილისი',  rating: 5 },
+          { text: 'ახლო მეგობარმა ურჩია — ახლა მეც ჩემს მეგობრებს ვურჩევ.',                        author: 'ვ. დ., ქუთაისი', rating: 5 },
         ],
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
     /* 19 — CTA 3 ────────────────────────────────────────── */
     {
-      id:      'shv_cta_03',
       type:    'cta',
       order:   19,
       enabled: true,
@@ -367,47 +286,39 @@ window.PAGE_DATA = {
         anchor:  '#order-form',
         subtext: 'მიტანა სახლში — სრულიად უფასოდ',
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
-    /* 20 — Process steps ────────────────────────────────── */
+    /* 20 — Steps ────────────────────────────────────────── */
     {
-      id:      'shv_steps',
       type:    'process-steps',
       order:   20,
       enabled: true,
       content: {
         title: 'შეკვეთა — 3 მარტივი ნაბიჯი',
         items: [
-          { icon: '📝', title: 'შეავსე ფორმა',      text: 'სახელი და ნომერი — 30 წამი' },
-          { icon: '📞', title: 'გადაგვირეკავთ',      text: 'ვადასტურებთ — სწრაფად და ადვილად' },
-          { icon: '🚚', title: 'მიგიტანთ სახლში',   text: 'მთელ საქართველოში — უფასოდ' },
+          { icon: '📝', title: 'შეავსე ფორმა',    text: 'სახელი და ნომერი — 30 წამი' },
+          { icon: '📞', title: 'გადაგვირეკავთ',    text: 'ვადასტურებთ — სწრაფად და ადვილად' },
+          { icon: '🚚', title: 'მიგიტანთ სახლში', text: 'მთელ საქართველოში — უფასოდ' },
         ],
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
-    /* 21 — Product image 5 (before/after effect) ────────── */
+    /* 21 — Product image 5 ──────────────────────────────── */
     {
-      id:      'shv_img_05',
       type:    'image-section',
       order:   21,
       enabled: true,
-      content: {
-        alt:     'გაპარსვის შედეგი — გლუვი, გაღიზიანების გარეშე',
-        caption: null,
-      },
-      media: {
-        image: null,   /* → result / before-after skin photo */
-      },
-      config: {},
+      content: { alt: 'გაპარსვის შედეგი — გლუვი, გაღიზიანების გარეშე' },
+      media:   { image: null },
+      config:  {},
     },
 
-    /* 22 — Text section (guarantee) ─────────────────────── */
+    /* 22 — Guarantee ────────────────────────────────────── */
     {
-      id:      'shv_txt_02',
       type:    'text-section',
       order:   22,
       enabled: true,
@@ -415,13 +326,12 @@ window.PAGE_DATA = {
         title: '🛡️ 100% გარანტია',
         body:  'თუ პირველი გამოყენების შემდეგ კმაყოფილი არ ხარ — ვიბრუნებთ ფულს. კითხვების გარეშე.',
       },
-      media: {},
+      media:  {},
       config: { align: 'center' },
     },
 
-    /* 23 — CTA 4 (pre-form push) ────────────────────────── */
+    /* 23 — CTA 4 ────────────────────────────────────────── */
     {
-      id:      'shv_cta_04',
       type:    'cta',
       order:   23,
       enabled: true,
@@ -430,29 +340,22 @@ window.PAGE_DATA = {
         anchor:  '#order-form',
         subtext: 'რამდენიმე ადგილი რჩება — ნუ გაჰყვები',
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
-    /* 24 — Product image 6 (social proof / scale) ───────── */
+    /* 24 — Product image 6 ──────────────────────────────── */
     {
-      id:      'shv_img_06',
       type:    'image-section',
       order:   24,
       enabled: true,
-      content: {
-        alt:     'შავლეგო — ათასობით კმაყოფილი მომხმარებელი მთელ საქართველოში',
-        caption: null,
-      },
-      media: {
-        image: null,   /* → social proof / happy customer photo */
-      },
-      config: {},
+      content: { alt: 'შავლეგო — ათასობით კმაყოფილი მომხმარებელი მთელ საქართველოში' },
+      media:   { image: null },
+      config:  {},
     },
 
     /* 25 — Order form ───────────────────────────────────── */
     {
-      id:      'shv_form',
       type:    'form',
       order:   25,
       enabled: true,
@@ -462,68 +365,27 @@ window.PAGE_DATA = {
         submitLabel: '✅ შეკვეთა — 99₾',
         note:        '🔒 შენი მონაცემები დაცულია. გარე სერვისებს არ ვუგზავნით.',
         fields: [
-          {
-            name:         'name',
-            type:         'text',
-            placeholder:  'შენი სახელი',
-            required:     true,
-            autocomplete: 'given-name',
-          },
-          {
-            name:         'phone',
-            type:         'tel',
-            placeholder:  'ტელეფონის ნომერი',
-            required:     true,
-            autocomplete: 'tel',
-          },
-          {
-            name:         'city',
-            type:         'text',
-            placeholder:  'ქალაქი',
-            required:     false,
-            autocomplete: 'address-level2',
-          },
+          { name: 'name',  type: 'text', placeholder: 'შენი სახელი',       required: true,  autocomplete: 'given-name' },
+          { name: 'phone', type: 'tel',  placeholder: 'ტელეფონის ნომერი',  required: true,  autocomplete: 'tel'        },
+          { name: 'city',  type: 'text', placeholder: 'ქალაქი',             required: false, autocomplete: 'address-level2' },
         ],
       },
-      media: {},
-      config: {
-        formId: 'order-form',   /* HTML anchor: href="#order-form" → lands here */
-      },
+      media:  {},
+      config: { formId: 'order-form' },
     },
 
     /* 26 — Contact info ─────────────────────────────────── */
     {
-      id:      'shv_contact',
       type:    'contact-info',
       order:   26,
       enabled: true,
       content: {
         title: 'კომპანიის ინფორმაცია',
         items: [
-          {
-            icon:  '📍',
-            label: 'მისამართი',
-            value: 'საქართველო, თბილისი, რუსთაველის გამზ. 10',
-            href:  null,
-          },
-          {
-            icon:  '📞',
-            label: 'ცხელი ხაზი',
-            value: '+995 555 79 35 58',
-            href:  'tel:+995555793558',
-          },
-          {
-            icon:  '✉️',
-            label: 'ელ-ფოსტა',
-            value: 'Shavlego.one@gmail.com',
-            href:  'mailto:Shavlego.one@gmail.com',
-          },
-          {
-            icon:  '🌐',
-            label: 'ვებსაიტი',
-            value: 'www.shavlego.one',
-            href:  'https://www.shavlego.one/',
-          },
+          { icon: '📍', label: 'მისამართი', value: 'საქართველო, თბილისი, რუსთაველის გამზ. 10',  href: null },
+          { icon: '📞', label: 'ცხელი ხაზი', value: '+995 555 79 35 58',    href: 'tel:+995555793558' },
+          { icon: '✉️', label: 'ელ-ფოსტა',   value: 'Shavlego.one@gmail.com', href: 'mailto:Shavlego.one@gmail.com' },
+          { icon: '🌐', label: 'ვებსაიტი',   value: 'www.shavlego.one',     href: 'https://www.shavlego.one/' },
         ],
         links: [
           { label: 'წესები და პირობები',         href: '#' },
@@ -531,10 +393,9 @@ window.PAGE_DATA = {
           { label: 'კონტაქტი',                   href: 'mailto:Shavlego.one@gmail.com' },
         ],
       },
-      media: {},
+      media:  {},
       config: {},
     },
 
-  ], /* end blocks */
-
-}; /* end PAGE_DATA */
+  ],
+};
