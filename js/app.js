@@ -1,83 +1,156 @@
 /* ============================================================
    app.js — Boot script
 
-   Resolves which page to load, fetches its data file
-   dynamically, then hands the data to the Renderer.
+   TWO MODES — controlled by SHEETS_API_URL below:
 
-   Page selection priority (first match wins):
-     1. ?page=slug  URL query parameter
-     2. PAGE_REGISTRY.default  (fallback)
+   ┌─────────────────────────────────────────────────────────┐
+   │  SHEETS_API_URL = null  →  LOCAL mode                   │
+   │    Reads data/registry.js → injects data/pages/*.js     │
+   │    Use during development (no internet needed).         │
+   │                                                         │
+   │  SHEETS_API_URL = '…'   →  API mode                     │
+   │    fetch(url + ?slug=…) → JSON → Renderer.render()      │
+   │    Use in production after deploying Apps Script.       │
+   └─────────────────────────────────────────────────────────┘
 
-   This means index.html never changes between pages.
-   The only wiring needed is one entry in data/registry.js.
-
-   ── Future: API-based loading ─────────────────────────────
-   Replace _loadPageScript() with a fetch() call:
-
-     fetch('/api/page?slug=' + slug)
-       .then(r => { if (!r.ok) throw r; return r.json(); })
-       .then(data => Renderer.render(data, 'app'))
-       .catch(err => _showError('Failed to load page: ' + err.status));
-
-   ── Future: hostname-based routing ────────────────────────
-   Replace _resolveSlug() with:
-
-     const HOST_MAP = PAGE_REGISTRY.hostnames || {};
-     return HOST_MAP[location.hostname] || PAGE_REGISTRY.default;
-
+   SWITCHING MODES
+   ───────────────
+   1. Deploy google-apps-script/Code.gs as a web app.
+   2. Copy the deployment URL (ends with /exec).
+   3. Replace null below with that URL string.
+   4. Deploy to Cloudflare Pages.
    ============================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (typeof PAGE_REGISTRY === 'undefined') {
-    _showError('PAGE_REGISTRY not found. Check that data/registry.js is loaded.');
-    return;
+/* ── SET THIS to your Apps Script deployment URL ───────────
+   Leave as null to stay in local / development mode.
+   ──────────────────────────────────────────────────────────── */
+const SHEETS_API_URL = null;
+// const SHEETS_API_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+
+
+/* ─────────────────────────────────────────────────────────── */
+
+document.addEventListener('DOMContentLoaded', function () {
+  var slug = _resolveSlug();
+
+  if (SHEETS_API_URL) {
+    _loadFromAPI(slug);
+  } else {
+    _loadFromRegistry(slug);
   }
-
-  const slug     = _resolveSlug();
-  const filePath = PAGE_REGISTRY.pages[slug];
-
-  if (!filePath) {
-    _showError('No page registered for slug "' + slug + '". Add it to data/registry.js.');
-    return;
-  }
-
-  _loadPageScript(filePath, slug);
 });
 
-/* ── Slug resolution ──────────────────────────────────────── */
-function _resolveSlug() {
-  const param = new URLSearchParams(window.location.search).get('page');
-  return (param && PAGE_REGISTRY.pages[param]) ? param : PAGE_REGISTRY.default;
+
+/* ── API MODE ───────────────────────────────────────────────
+   Fetches PAGE_DATA from the Apps Script web app and passes
+   it directly to Renderer.render(). The renderer is unchanged.
+   ──────────────────────────────────────────────────────────── */
+function _loadFromAPI(slug) {
+  var url = SHEETS_API_URL + '?slug=' + encodeURIComponent(slug);
+
+  fetch(url, { redirect: 'follow' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' from API');
+      return res.json();
+    })
+    .then(function (data) {
+      if (data.error) throw new Error('API returned error: ' + data.error);
+      Renderer.render(data, 'app');
+    })
+    .catch(function (err) {
+      /* If you see CORS errors here, see README for the
+         Cloudflare Worker proxy workaround. */
+      _showError('[API] ' + err.message);
+    });
 }
 
-/* ── Dynamic script loader ────────────────────────────────── */
-function _loadPageScript(filePath, slug) {
-  const script  = document.createElement('script');
-  script.src    = filePath;
-  script.async  = false;
 
-  script.onload = () => {
+/* ── LOCAL MODE (development) ───────────────────────────────
+   Resolves slug → file path via PAGE_REGISTRY, then injects
+   the page data file as a <script> tag. Once loaded, PAGE_DATA
+   is available globally and passed to Renderer.render().
+   ──────────────────────────────────────────────────────────── */
+function _loadFromRegistry(slug) {
+  if (typeof PAGE_REGISTRY === 'undefined') {
+    _showError('PAGE_REGISTRY not found. Make sure data/registry.js is loaded before app.js.');
+    return;
+  }
+
+  var filePath = PAGE_REGISTRY.pages[slug];
+
+  if (!filePath) {
+    _showError(
+      'No page registered for slug "' + slug + '". ' +
+      'Add it to data/registry.js or pass ?page= in the URL.'
+    );
+    return;
+  }
+
+  var script  = document.createElement('script');
+  script.src  = filePath;
+  script.async = false;
+
+  script.onload = function () {
     if (typeof PAGE_DATA === 'undefined') {
-      _showError('PAGE_DATA was not set by "' + filePath + '". Check the file exports window.PAGE_DATA.');
+      _showError(
+        'PAGE_DATA was not set by "' + filePath + '". ' +
+        'Check that the file ends with: window.PAGE_DATA = { … };'
+      );
       return;
     }
     Renderer.render(PAGE_DATA, 'app');
   };
 
-  script.onerror = () => {
-    _showError('Could not load page file: "' + filePath + '". Check the path in data/registry.js.');
+  script.onerror = function () {
+    _showError(
+      'Could not load page file: "' + filePath + '". ' +
+      'Check the path in data/registry.js and run via a local server (not file://).'
+    );
   };
 
   document.head.appendChild(script);
 }
 
-/* ── Error display ────────────────────────────────────────── */
+
+/* ── Slug resolution ────────────────────────────────────────
+   Priority order:
+     1. ?page=shavlego        (URL param — dev override)
+     2. PAGE_REGISTRY.default (local fallback from registry.js)
+     3. hostname              (www.shavlego.one → "shavlego")
+     4. 'shavlego'            (hard fallback)
+   ──────────────────────────────────────────────────────────── */
+function _resolveSlug() {
+  /* 1 — explicit URL param */
+  var params   = new URLSearchParams(window.location.search);
+  var urlParam = params.get('page');
+  if (urlParam) return urlParam.toLowerCase().trim();
+
+  /* 2 — local registry default */
+  if (typeof PAGE_REGISTRY !== 'undefined' && PAGE_REGISTRY.default) {
+    return PAGE_REGISTRY.default;
+  }
+
+  /* 3 — derive from hostname (production)
+         www.shavlego.one  →  shavlego
+         demo.mysite.com   →  demo               */
+  var hostname = window.location.hostname;
+  if (hostname && hostname !== 'localhost' && hostname !== '127.0.0.1') {
+    return hostname.replace(/^www\./, '').split('.')[0].toLowerCase().trim();
+  }
+
+  /* 4 — absolute fallback */
+  return 'shavlego';
+}
+
+
+/* ── Error display ──────────────────────────────────────────── */
 function _showError(msg) {
-  console.error('[App]', msg);
-  const app = document.getElementById('app');
+  var app = document.getElementById('app');
   if (app) {
     app.innerHTML =
-      '<div style="padding:40px 24px;font-family:sans-serif;color:#b91c1c;">' +
-      '<strong>Page load error</strong><br><br>' + msg + '</div>';
+      '<div style="padding:2rem;color:#cc0000;font-family:monospace;line-height:1.6;">' +
+      '<strong>[app.js] Page load error</strong><br><br>' + msg +
+      '</div>';
   }
+  console.error('[app.js]', msg);
 }
