@@ -1,44 +1,56 @@
 /* ============================================================
    renderer.js — Landing page rendering engine
 
-   Responsibilities:
-     1. Apply theme (CSS variables) from page meta
-     2. Update document <title> and <meta description>
-     3. Render all blocks into #app
-     4. Initialise dynamic components (countdown timers, forms)
+   Expected page data shape (pageData):
+   ┌──────────────────────────────────────────────────────────┐
+   │  {                                                       │
+   │    slug:     string   page identifier                    │
+   │    meta:     { title, description, lang, favicon }       │
+   │    theme:    { primaryColor }                            │
+   │    settings: { currency, ctaAnchor }                     │
+   │    blocks:   Block[]  (see blocks.js for block schema)   │
+   │  }                                                       │
+   └──────────────────────────────────────────────────────────┘
 
-   How to connect an API later (no other file changes needed):
-     In app.js, replace:
-       Renderer.render(window.PAGE_DATA, 'app');
-     With:
-       fetch('/api/page?slug=shavlego')
-         .then(r => r.json())
-         .then(data => Renderer.render(data, 'app'))
-         .catch(err => console.error('[App] Failed to load page data', err));
+   Blocks are filtered (enabled !== false) and sorted by
+   block.order before rendering — the data file does NOT need
+   to be in order; order numbers drive the sequence.
+
+   ── Future: API-based loading ─────────────────────────────
+   In app.js, replace the script-injection call with:
+
+     fetch('/api/page?slug=' + slug)
+       .then(r => { if (!r.ok) throw r; return r.json(); })
+       .then(data => Renderer.render(data, 'app'))
+       .catch(err => _showError('Failed: ' + err.status));
+
+   The shape returned by the API must match the schema above.
+   No other file needs to change.
    ============================================================ */
 
 const Renderer = (() => {
   'use strict';
 
   /* ── Public: render ───────────────────────────────────────
-     Entry point. Call once per page load.
+     Single entry point. Call once per page load.
   ──────────────────────────────────────────────────────── */
   function render(pageData, containerId) {
-    _applyTheme(pageData.meta);
-    _applyMeta(pageData.meta);
+    _applyTheme(pageData.theme || {});
+    _applyMeta(pageData.meta  || {});
+    _stampSlug(pageData.slug, containerId);
     _renderBlocks(pageData.blocks || [], containerId);
     _initCountdowns();
     _initForms();
   }
 
   /* ── Theme ────────────────────────────────────────────────
-     Writes CSS custom properties onto :root so every block
-     inherits the page's primary color automatically.
+     Reads from pageData.theme (not meta) so theme and
+     content concerns are cleanly separated.
   ──────────────────────────────────────────────────────── */
-  function _applyTheme(meta) {
-    if (!meta || !meta.primaryColor) return;
+  function _applyTheme(theme) {
+    if (!theme.primaryColor) return;
     const root  = document.documentElement;
-    const color = meta.primaryColor;
+    const color = theme.primaryColor;
     root.style.setProperty('--color-primary',       color);
     root.style.setProperty('--color-primary-dark',  Utils.hexDarken(color, 15));
     root.style.setProperty('--color-primary-light', Utils.hexToRgba(color, 0.1));
@@ -48,18 +60,29 @@ const Renderer = (() => {
      Updates <title>, <meta description>, and <html lang>.
   ──────────────────────────────────────────────────────── */
   function _applyMeta(meta) {
-    if (!meta) return;
-    if (meta.title) document.title = meta.title;
-    if (meta.lang)  document.documentElement.setAttribute('lang', meta.lang);
+    if (meta.title)       document.title = meta.title;
+    if (meta.lang)        document.documentElement.setAttribute('lang', meta.lang);
     if (meta.description) {
       const el = document.querySelector('meta[name="description"]');
       if (el) el.setAttribute('content', meta.description);
     }
   }
 
+  /* ── Slug stamp ───────────────────────────────────────────
+     Writes the page slug onto #app as a data attribute.
+     Useful for analytics, debugging, and future hostname routing.
+  ──────────────────────────────────────────────────────── */
+  function _stampSlug(slug, containerId) {
+    if (!slug) return;
+    const app = document.getElementById(containerId);
+    if (app) app.dataset.pageSlug = slug;
+  }
+
   /* ── Block rendering ──────────────────────────────────────
-     Delegates each block to Blocks.render(), then injects
-     the resulting HTML in one assignment (single reflow).
+     1. Filter out blocks where enabled === false
+     2. Sort ascending by block.order
+     3. Delegate each block to Blocks.render()
+     4. Inject HTML in one assignment (single reflow)
   ──────────────────────────────────────────────────────── */
   function _renderBlocks(blocks, containerId) {
     const container = document.getElementById(containerId);
@@ -67,12 +90,19 @@ const Renderer = (() => {
       console.error('[Renderer] Container #' + containerId + ' not found');
       return;
     }
-    container.innerHTML = blocks.map(b => Blocks.render(b)).join('');
+
+    const html = blocks
+      .filter(b => b.enabled !== false)
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .map(b => Blocks.render(b))
+      .join('');
+
+    container.innerHTML = html;
   }
 
   /* ── Dynamic: countdowns ──────────────────────────────────
-     Finds every [data-countdown-key] element rendered by the
-     countdown block and starts its timer.
+     config.key  → sessionStorage key (persists across refreshes)
+     config.hours → initial duration
   ──────────────────────────────────────────────────────── */
   function _initCountdowns() {
     document.querySelectorAll('[data-countdown-key]').forEach(el => {
@@ -85,12 +115,11 @@ const Renderer = (() => {
   }
 
   /* ── Dynamic: forms ───────────────────────────────────────
-     Attaches submit handler to every .block-form__form.
-     Validates required fields, shows loading state, then
-     replaces form with a success message.
+     Validates required fields, shows loading state, replaces
+     form with success message on submit.
 
-     The fetch() call below is stubbed with a setTimeout.
-     To go live, replace the setTimeout block with:
+     To wire a real backend, replace the setTimeout in
+     _handleSubmit with a fetch() call to your Pages Function:
 
        fetch('/functions/api/submit', {
          method:  'POST',
@@ -110,17 +139,15 @@ const Renderer = (() => {
   function _handleSubmit(e) {
     e.preventDefault();
     const form  = e.target;
-    const valid = _validateForm(form);
-    if (!valid) return;
+    if (!_validateForm(form)) return;
 
     const btn   = form.querySelector('button[type="submit"]');
     const label = btn.textContent;
     btn.textContent = 'იგზავნება...';
     btn.disabled    = true;
 
-    /* ── TODO: replace with real fetch ───────────────────── */
+    /* ── TODO: replace with fetch() when backend is ready ── */
     setTimeout(() => _showFormSuccess(form), 800);
-    /* ─────────────────────────────────────────────────────── */
   }
 
   function _validateForm(form) {
@@ -148,7 +175,7 @@ const Renderer = (() => {
     const wrap = form.closest('.block-form');
     const cont = wrap && wrap.querySelector('.lp-container');
     if (!cont) return;
-      cont.innerHTML = `
+    cont.innerHTML = `
       <div class="block-form__success">
         <div class="block-form__success-icon">✅</div>
         <h3>შეკვეთა მიღებულია!</h3>

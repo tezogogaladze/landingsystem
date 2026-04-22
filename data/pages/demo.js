@@ -1,174 +1,268 @@
 /* ============================================================
-   data/pages/demo.js — ფიტპლანი
-   30-დღიანი სახლის ვარჯიშის პროგრამა.
-   To preview: index.html?page=demo
+   data/pages/demo.js — Page data: FitPlan Pro
+
+   Demonstrates a second page with a different product, theme
+   colour, and block mix. Same normalised schema as shavlego.js.
    ============================================================ */
 
 window.PAGE_DATA = {
 
+  /* ── Page-level (→ "Pages" sheet row) ─────────────────── */
+  slug: 'demo',
+
   meta: {
-    title:        'ფიტპლანი | დაიწყე 30-დღიანი ტრანსფორმაცია',
-    description:  'სახლის ვარჯიშის პროგრამა. სნარიადები არ სჭირდება. რეალური შედეგი 30 დღეში.',
-    primaryColor: '#7c3aed',
-    lang:         'ka'
+    title:       'FitPlan Pro — 30-დღიანი ფიტნეს პროგრამა',
+    description: 'პერსონალიზებული ვარჯიშის გეგმა, რომელიც სახლიდან გაუსვლელად მუშაობს.',
+    lang:        'ka',
+    favicon:     null,
   },
 
+  theme: {
+    primaryColor: '#7c3aed',
+  },
+
+  settings: {
+    currency:  '₾',
+    ctaAnchor: '#signup-form',
+  },
+
+
+  /* ── Blocks ────────────────────────────────────────────── */
   blocks: [
 
+    /* 01 — Hero ─────────────────────────────────────────── */
     {
-      type:     'hero',
-      badge:    '30-დღიანი ფულის დაბრუნების გარანტია',
-      image:    null,
-      title:    'ფიტპლანი',
-      subtitle: '30-დღიანი სახლის ვარჯიში — სნარიადები არ სჭირდება',
-      price: {
-        old:      '89',
-        new:      '39',
-        currency: '$',
-        oldLabel: 'ძველი ფასი',
-        newLabel: 'ახალი ფასი'
+      id:      'demo_hero',
+      type:    'hero',
+      order:   1,
+      enabled: true,
+      content: {
+        badge:         '🔥 დაწყება — 30 დღე, სახლიდან',
+        title:         'FitPlan Pro',
+        subtitle:      'პერსონალიზებული ვარჯიშის გეგმა — შენი სხეულისთვის, შენი ტემპისთვის',
+        priceOld:      '149',
+        priceNew:      '79',
+        priceCurrency: '₾',
+        priceOldLabel: 'ჩვეულებრივი ფასი',
+        priceNewLabel: 'სპეციალური ფასი',
+        ctaLabel:      'პროგრამის დაწყება',
+        ctaAnchor:     '#signup-form',
       },
-      cta: { label: 'შეუკვეთე — $39', anchor: '#order-form' }
+      media: {
+        image: null,
+      },
+      config: {},
     },
 
+    /* 02 — Countdown ────────────────────────────────────── */
     {
-      type:  'countdown',
-      key:   'demo',
-      label: 'საწყისი ფასი იწურება',
-      hours: 48
+      id:      'demo_countdown',
+      type:    'countdown',
+      order:   2,
+      enabled: true,
+      content: {
+        label: '⏰ შეთავაზება სრულდება',
+      },
+      media: {},
+      config: {
+        key:   'fitplan',
+        hours: 48,
+      },
     },
 
+    /* 03 — Features list ────────────────────────────────── */
     {
-      type:  'features-list',
-      title: 'რა შედის პაკეტში',
-      items: [
-        { icon: '📱', text: '30 ყოველდღიური ვარჯიში — 20 წუთი, სნარიადების გარეშე' },
-        { icon: '🥗', text: 'კვების სახელმძღვანელო მარტივი კვების გეგმებით' },
-        { icon: '📊', text: 'პროგრესის ტრეკერი — შედეგების კონტროლი' },
-        { icon: '♾️',  text: 'უვადო წვდომა — ივარჯიშე საკუთარი ტემპით' }
-      ]
+      id:      'demo_features',
+      type:    'features-list',
+      order:   3,
+      enabled: true,
+      content: {
+        title: 'რა შედის პაკეტში?',
+        items: [
+          { icon: '📅', text: '30 სრულად სტრუქტურირებული ვარჯიშის დღე' },
+          { icon: '🥗', text: 'კვების გეგმა — კვირა-კვირა, შენი მიზნისთვის' },
+          { icon: '📱', text: 'მობილური PDF + ვიდეო გზამკვლევი' },
+          { icon: '💬', text: 'ხელმისაწვდომობა WhatsApp-ით — 24/7' },
+          { icon: '🔁', text: 'სამუდამო განახლება — ერთი გადახდა' },
+        ],
+      },
+      media: {},
+      config: {},
     },
 
+    /* 04 — CTA 1 ────────────────────────────────────────── */
     {
+      id:      'demo_cta_01',
       type:    'cta',
-      label:   'შეიძინე ფიტპლანი — $39',
-      anchor:  '#order-form',
-      subtext: '30-დღიანი ფულის დაბრუნების გარანტია, კითხვების გარეშე'
+      order:   4,
+      enabled: true,
+      content: {
+        label:   '💪 ახლა დავიწყოთ — 79₾',
+        anchor:  '#signup-form',
+        subtext: 'მყისიერი წვდომა შეძენისთანავე',
+      },
+      media: {},
+      config: {},
     },
 
+    /* 05 — Pain / solution 1 ────────────────────────────── */
     {
-      type:     'pain-solution',
-      question: 'სპორტდარბაზის აბონემენტი ძვირია და ვერ ასწრებ სიარულს?',
-      answer:   'ფიტპლანი შექმნილია რეალური ცხოვრებისთვის — 20 წუთი, სახლში, სნარიადების გარეშე. გახდი ფიტი სახლიდან გაუსვლელად.',
-      image:    null
+      id:      'demo_ps_01',
+      type:    'pain-solution',
+      order:   5,
+      enabled: true,
+      content: {
+        question: '😩 სპორტდარბაზში ფული გახარჯე, შედეგი კი — ნული?',
+        answer:   'FitPlan Pro მუშაობს სახლიდან — 20 კვადრატი, ნება, და ჩვენი გეგმა. სხვა არაფერი.',
+      },
+      media: { image: null },
+      config: {},
     },
 
+    /* 06 — Benefits grid ────────────────────────────────── */
     {
-      type:     'pain-solution',
-      question: 'პროგრამები უკვე სცადე, მაგრამ პირველ კვირაში ყოველთვის შეჩერდი?',
-      answer:   'ფიტპლანი ყოველ დღე პროგრესულად რთულდება. პირველი კვირა დამწყებთათვისაც შესაძლებელია. მე-4 კვირაში ვეღარ იცნობ შენი სხეულის შესაძლებლობებს.',
-      image:    null
+      id:      'demo_benefits',
+      type:    'benefits-grid',
+      order:   6,
+      enabled: true,
+      content: {
+        title: 'შედეგები 30 დღეში',
+        items: [
+          { number: '−5kg',  title: 'საშუალო წონის კლება',  text: 'კლიენტების 83%-ს პირველ თვეში' },
+          { number: '30',    title: 'ვარჯიშის დღე',          text: 'სტრუქტურირებული, პროგრესული' },
+          { number: '20min', title: 'ყოველდღიური სეანსი',   text: 'დრო მინიმალური, შედეგი — ჭეშმარიტი' },
+          { number: '0₾',    title: 'სპორტდარბაზის ტარიფი', text: 'საჭირო არ არის — ოთახი გამოგადგება' },
+        ],
+      },
+      media: {},
+      config: {},
     },
 
+    /* 07 — Video ────────────────────────────────────────── */
     {
-      type:     'pain-solution',
-      question: 'კვება გაქვს ამოყირავებული და კვების სახელმძღვანელოებში ვეღარ ერკვევი?',
-      answer:   'ჩვენი კვების სახელმძღვანელო მარტივია: ნამდვილი საკვები, კალორიების დათვლის გარეშე. იმდენად ადვილია, რომ ყველას შეუძლია მიჰყვეს.',
-      image:    null
+      id:      'demo_video',
+      type:    'video-section',
+      order:   7,
+      enabled: true,
+      content: {
+        title: '🎬 ნახე, როგორ მუშაობს',
+      },
+      media: {
+        video: null,
+      },
+      config: {},
     },
 
+    /* 08 — Testimonials ─────────────────────────────────── */
     {
-      type:  'benefits-grid',
-      title: 'რატომ მუშაობს ფიტპლანი',
-      items: [
-        { number: '01', title: 'მოკლე',       text: '20 წთ/დღეში — ნებისმიერ გრაფიკში ეტევა.' },
-        { number: '02', title: 'პროგრესული',  text: 'ყოველ დღე მეტი — შედეგი გარანტირებულია.' },
-        { number: '03', title: 'სრული',       text: 'ვარჯიში + კვება — ერთ პაკეტში.' },
-        { number: '04', title: 'გარანტია',    text: '30 დღე — ფულის დაბრუნება, კითხვების გარეშე.' }
-      ]
+      id:      'demo_reviews',
+      type:    'testimonials',
+      order:   8,
+      enabled: true,
+      content: {
+        title: '⭐ ისინი უკვე შედეგზე არიან',
+        items: [
+          { text: 'მე ვცდი ყველაფერი — FitPlan-ი ერთადერთია, სადაც ბოლომდე მივედი.', author: 'ა. გ., თბილისი',  rating: 5 },
+          { text: '30 დღეში 6 კგ ჩამოვრდი. ახლა მე-2 რაუნდი მაქვს დაწყებული.',      author: 'ნ. კ., ბათუმი',   rating: 5 },
+          { text: 'კვების გეგმა ოქრო ღირს — სხვა ადგილას ამდენს ვერ ნახავ.',         author: 'გ. ჯ., ქუთაისი', rating: 5 },
+        ],
+      },
+      media: {},
+      config: {},
     },
 
+    /* 09 — Process steps ────────────────────────────────── */
     {
+      id:      'demo_steps',
+      type:    'process-steps',
+      order:   9,
+      enabled: true,
+      content: {
+        title: 'მარტივი დაწყება',
+        items: [
+          { icon: '💳', title: 'გადაიხდი',            text: '79₾ — ერთი გადახდა, სამუდამო წვდომა' },
+          { icon: '📥', title: 'ჩამოტვირთე',          text: 'PDF + ვიდეო — მყისიერად' },
+          { icon: '🔥', title: 'დაიწყე ვარჯიში',      text: 'პირველი ვარჯიში — დღესვე' },
+        ],
+      },
+      media: {},
+      config: {},
+    },
+
+    /* 10 — Text (guarantee) ─────────────────────────────── */
+    {
+      id:      'demo_txt_guarantee',
+      type:    'text-section',
+      order:   10,
+      enabled: true,
+      content: {
+        title: '🛡️ 14-დღიანი გარანტია',
+        body:  'თუ შედეგი არ გამოჩნდა 14 დღეში — გიბრუნებთ ფულს. სრულად. კითხვების გარეშე.',
+      },
+      media: {},
+      config: { align: 'center' },
+    },
+
+    /* 11 — CTA 2 ────────────────────────────────────────── */
+    {
+      id:      'demo_cta_02',
       type:    'cta',
-      label:   'გაწევრიანდი — $39',
-      anchor:  '#order-form',
-      subtext: 'ერთჯერადი გადახდა. უვადო წვდომა.'
+      order:   11,
+      enabled: true,
+      content: {
+        label:   '🚀 79₾-ად დავიწყე',
+        anchor:  '#signup-form',
+        subtext: 'შეზღუდული ადგილები — ახლა ან ვეღარ',
+      },
+      media: {},
+      config: {},
     },
 
+    /* 12 — Form ─────────────────────────────────────────── */
     {
-      type:  'video-section',
-      title: 'ნახე ვარჯიშის მაგალითი',
-      src:   null
+      id:      'demo_form',
+      type:    'form',
+      order:   12,
+      enabled: true,
+      content: {
+        title:       '📋 დარეგისტრირდი',
+        subtitle:    'ჩვენ გამოგიგზავნით წვდომის ბმულს',
+        submitLabel: '✅ შეძენა — 79₾',
+        note:        '🔒 შენი მონაცემები დაცულია.',
+        fields: [
+          { name: 'name',  type: 'text',  placeholder: 'სახელი',           required: true,  autocomplete: 'given-name' },
+          { name: 'email', type: 'email', placeholder: 'ელ-ფოსტა',         required: true,  autocomplete: 'email'      },
+          { name: 'phone', type: 'tel',   placeholder: 'ტელეფონის ნომერი', required: false, autocomplete: 'tel'        },
+        ],
+      },
+      media: {},
+      config: {
+        formId: 'signup-form',
+      },
     },
 
+    /* 13 — Contact info ─────────────────────────────────── */
     {
-      type:  'testimonials',
-      title: 'რეალური შედეგები რეალური ადამიანებისგან',
-      items: [
-        { rating: 5, text: 'პირველ 30 დღეში 4 კგ დავიკლე სპორტდარბაზში ერთხელაც კი არ წასვლის გარეშე. ვარჯიშები რთულია, მაგრამ სრულიად შესაძლებელი.',  author: 'სალომე კ.'  },
-        { rating: 5, text: 'ყველა პროგრამა მიცდია. ეს პირველია, რომელიც ბოლომდე გავიარე. პროგრესიულობა გამოქცევის საშუალებას არ გაძლევს.',             author: 'მარიამ ლ.' },
-        { rating: 5, text: 'კვების სახელმძღვანელო მარტო ფასს ღირს. მარტივი, პრაქტიკული, და საბოლოოდ გავწყვიტე ურთიერთობა კვებასთან დაკავშირებულ დაბნეულობას.', author: 'ნინო დ.'   }
-      ]
+      id:      'demo_contact',
+      type:    'contact-info',
+      order:   13,
+      enabled: true,
+      content: {
+        title: 'FitPlan Pro — კონტაქტი',
+        items: [
+          { icon: '📧', label: 'ელ-ფოსტა', value: 'hello@fitplanpro.ge', href: 'mailto:hello@fitplanpro.ge' },
+          { icon: '📞', label: 'მხარდაჭერა', value: '+995 555 00 00 00',  href: 'tel:+995555000000'          },
+          { icon: '🌐', label: 'ვებსაიტი',   value: 'fitplanpro.ge',      href: 'https://fitplanpro.ge'      },
+        ],
+        links: [
+          { label: 'წესები და პირობები',         href: '#' },
+          { label: 'კონფიდენციალობის პოლიტიკა', href: '#' },
+        ],
+      },
+      media: {},
+      config: {},
     },
 
-    {
-      type:  'text-section',
-      title: 'სნარიადები არ სჭირდება. სპორტდარბაზი არ სჭირდება.',
-      body:  'ფიტპლანის ყოველი ვარჯიში მხოლოდ სხეულის წონას იყენებს. გააკეთე სალონში, სასტუმრო ოთახში ან ეზოში. საჭიროა მხოლოდ 20 წუთი და გადაწყვეტილება.',
-      align: 'center'
-    },
+  ], /* end blocks */
 
-    {
-      type:  'specs-list',
-      title: 'პაკეტის შემადგენლობა',
-      items: [
-        '30 ვარჯიშის ვიდეო (თითო 20 წუთი)',
-        'დამწყები, საშუალო და მოწინავე ტრეკები',
-        'ამობეჭდვადი 30-დღიანი კალენდარი',
-        'კვების სახელმძღვანელო (PDF)',
-        'პროგრესის ტრეკინგის ფურცელი',
-        'უვადო წვდომა — გამოწერა არ სჭირდება'
-      ]
-    },
-
-    {
-      type:    'cta',
-      label:   'დავიწყო ტრანსფორმაცია — $39',
-      anchor:  '#order-form',
-      subtext: null
-    },
-
-    {
-      type:  'process-steps',
-      title: 'როგორ მუშაობს',
-      items: [
-        { icon: '💳', title: 'ერთხელ იხდი',       text: 'ერთჯერადი გადახდა $39 — განმეორებადი ჩამოჭრა არ არის.' },
-        { icon: '📧', title: 'მყისიერი წვდომა',    text: 'შეამოწმე ელ-ფოსტა — წვდომის ბმული 2 წუთში მოვა.' },
-        { icon: '📅', title: 'პირველი დღე',        text: 'გახსენი პირველი დღის ვარჯიში და დააჭირე Play. ესა და ეს.' },
-        { icon: '🏆', title: 'ნახე შედეგები',      text: 'მიჰყევი გეგმას და აკვირდე შენს ტრანსფორმაციას 30 დღის განმავლობაში.' }
-      ]
-    },
-
-    {
-      type:        'form',
-      id:          'order-form',
-      title:       'მყისიერი წვდომა',
-      subtitle:    'შეიყვანე ელ-ფოსტა და წვდომის ბმულს მყისიერად გამოგიგზავნით',
-      fields: [
-        { type: 'text',  name: 'name',  placeholder: 'შენი სახელი',  required: true, autocomplete: 'name'  },
-        { type: 'email', name: 'email', placeholder: 'ელ-ფოსტა',    required: true, autocomplete: 'email' }
-      ],
-      submitLabel: 'გამომიგზავნე წვდომა',
-      note:        '30-დღიანი ფულის დაბრუნების გარანტია. გაუქმება ნებისმიერ დროს.'
-    },
-
-    {
-      type:     'callback-cta',
-      title:    'კითხვა გაქვს?',
-      subtitle: 'შეავსე ფორმა და ერთ საათში გიკავშირდებით.',
-      label:    'გადადი ფორმაზე',
-      anchor:   '#order-form'
-    }
-
-  ]
-};
+}; /* end PAGE_DATA */

@@ -1,316 +1,540 @@
 /* ============================================================
-   data/pages/shavlego.js — შავლეგო
-   To preview: index.html?page=shavlego
+   data/pages/shavlego.js — Page data: Shavlego
+
+   Schema quick-reference:
+   ┌──────────────────────────────────────────────────────────┐
+   │  PAGE LEVEL (maps to "Pages" sheet in Google Sheets)     │
+   │    slug, meta.*, theme.*, settings.*                     │
+   │                                                          │
+   │  BLOCK LEVEL (maps to "Blocks" sheet)                    │
+   │    id, type, order, enabled                              │
+   │    content.*  →  editorial copy / text                   │
+   │    media.*    →  asset URLs (replace null with real URL) │
+   │    config.*   →  technical / type-specific options       │
+   │                                                          │
+   │  ITEM ARRAYS (maps to "Items" sheet with block_id FK)    │
+   │    content.items, content.fields, content.links          │
+   └──────────────────────────────────────────────────────────┘
    ============================================================ */
 
 window.PAGE_DATA = {
 
+  /* ── Page-level (→ "Pages" sheet row) ─────────────────── */
+  slug: 'shavlego',
+
   meta: {
-    title:        'შავლეგო | შეუკვეთე ახლა — 99₾',
-    description:  'ინოვაციური 5-თავაკიანი ელექტრო საპარსი. უფასო მიწოდება. გადახდა მიღებისას.',
-    primaryColor: '#e63946',
-    lang:         'ka'
+    title:       'შავლეგო — გაპარსვის პრო კომპლექტი',
+    description: '5-თავაკიანი გაპარსვის სისტემა, რომელიც თქვენს სახეს სრულ სიმრბილეს ანიჭებს.',
+    lang:        'ka',
+    favicon:     null,
   },
 
+  theme: {
+    primaryColor: '#e63946',
+  },
+
+  settings: {
+    currency:   '₾',
+    ctaAnchor:  '#order-form',
+  },
+
+
+  /* ── Blocks (→ "Blocks" sheet rows + "Items" sheet rows) ─ */
   blocks: [
 
-    /* ── 1. Hero ──────────────────────────────────────────── */
+    /* 01 — Hero ─────────────────────────────────────────── */
     {
-      type:     'hero',
-      badge:    'სპეციალური შეთავაზება — შეზღუდული დრო',
-      image:    null,
-      title:    'შავლეგო',
-      subtitle: 'გაპარსვის ინოვაციური პროცესი',
-      price: {
-        old:      '136',
-        new:      '99',
-        currency: '₾',
-        oldLabel: 'ძველი ფასი',
-        newLabel: 'ახალი ფასი'
+      id:      'shv_hero',
+      type:    'hero',
+      order:   1,
+      enabled: true,
+      content: {
+        badge:         '🔥 სპეციალური შეთავაზება — შეზღუდული დრო!',
+        title:         'შავლეგო',
+        subtitle:      'გაპარსვის 5-თავაკიანი ინოვაციური სისტემა — სიმრბილე, სიზუსტე, სტილი',
+        priceOld:      '136',
+        priceNew:      '99',
+        priceCurrency: '₾',
+        priceOldLabel: 'ძველი ფასი',
+        priceNewLabel: 'ახლა მხოლოდ',
+        ctaLabel:      'შეკვეთის გაფორმება',
+        ctaAnchor:     '#order-form',
       },
-      cta: { label: 'შეკვეთის გაფორმება', anchor: '#order-form' }
+      media: {
+        image: null,   /* → replace with product hero image URL */
+      },
+      config: {},
     },
 
-    /* ── 2. Countdown ─────────────────────────────────────── */
+    /* 02 — Countdown ────────────────────────────────────── */
     {
-      type:  'countdown',
-      key:   'shavlego',
-      label: 'აქციის დასრულებამდე დარჩა',
-      hours: 24
+      id:      'shv_countdown',
+      type:    'countdown',
+      order:   2,
+      enabled: true,
+      content: {
+        label: '⏳ ფასდაკლება სრულდება — გამოიყენე სანამ არ გვიანა',
+      },
+      media: {},
+      config: {
+        key:   'shavlego',
+        hours: 24,
+      },
     },
 
-    /* ── 3. Image: product reveal ─────────────────────────── */
+    /* 03 — Product image 1 (intro) ──────────────────────── */
     {
+      id:      'shv_img_01',
       type:    'image-section',
-      src:     null,
-      alt:     'შავლეგო — 5-თავაკიანი სისტემა, პროდუქტის ახლო კადრი',
-      caption: null
+      order:   3,
+      enabled: true,
+      content: {
+        alt:     'შავლეგო — 5-თავაკიანი სისტემა, პროდუქტის ახლო კადრი',
+        caption: null,
+      },
+      media: {
+        image: null,   /* → product close-up photo */
+      },
+      config: {},
     },
 
-    /* ── 4. Features ──────────────────────────────────────── */
+    /* 04 — Features list ────────────────────────────────── */
     {
-      type:  'features-list',
-      title: 'რატომ შავლეგო?',
-      items: [
-        { icon: '⚡', text: 'შავლეგო მხოლოდ 90 წამში პარსავს წვერსა და თმას' },
-        { icon: '💧', text: 'უსადენო და წყალგამძლე — გამოიყენე ნებისმიერ ადგილას' },
-        { icon: '🛡️', text: 'ანტიალერგიული 5-თავაკიანი სისტემა — ნაკაწრები და გაღიზიანება გამორიცხულია' },
-        { icon: '✂️', text: '2-ში-1: წვერი და თმა — ერთი მოწყობილობა' }
-      ]
+      id:      'shv_features',
+      type:    'features-list',
+      order:   4,
+      enabled: true,
+      content: {
+        title: 'რატომ შავლეგო?',
+        items: [
+          { icon: '⚡', text: '5-თავაკიანი სისტემა — ყოველი კვეთა ზუსტი და კომფორტული' },
+          { icon: '💧', text: 'ალოე ვერა და ვიტამინი E — კანის ღრმა დამცველი ბარიერი' },
+          { icon: '🔄', text: 'FlexGlide® ტექნოლოგია — თავი ეგუება სახის კონტურს' },
+          { icon: '⏱', text: '3 კვირა ერთ შაშხანაზე — ეკონომიური და პრაქტიკული' },
+          { icon: '✅', text: 'ჰიპოალერგიული — მგრძნობიარე კანისთვის შემოწმებული' },
+        ],
+      },
+      media: {},
+      config: {},
     },
 
-    /* ── 5. Image: lifestyle — man shaving ────────────────── */
+    /* 05 — CTA 1 ────────────────────────────────────────── */
     {
-      type:    'image-section',
-      src:     null,
-      alt:     'კაცი პარსავს შავლეგოთი — სწრაფი და კომფორტული გაპარსვა',
-      caption: null
-    },
-
-    /* ── 6. CTA #1 ────────────────────────────────────────── */
-    {
+      id:      'shv_cta_01',
       type:    'cta',
-      label:   'შეკვეთის გაფორმება',
-      anchor:  '#order-form',
-      subtext: 'უფასო მიწოდება თქვენს კართან'
+      order:   5,
+      enabled: true,
+      content: {
+        label:   '🛒 შეკვეთის გაფორმება — 99₾',
+        anchor:  '#order-form',
+        subtext: 'უფასო მიწოდება მთელ საქართველოში',
+      },
+      media: {},
+      config: {},
     },
 
-    /* ── 7. Pain-solution #1 ──────────────────────────────── */
+    /* 06 — Product image 2 (in-use lifestyle) ───────────── */
     {
-      type:     'pain-solution',
-      question: 'გაღიზიანება და ნაკაწრები ყოველ დილას? გაიცანი შავლეგო!',
-      answer:   'შავლეგოს 5 მოქნილი ანტიალერგიული თავაკი სრულყოფილად ერგება შენი სახის კონტურებს და სამუდამოდ გაათავისუფლებს კანის გაღიზიანებისა და ჩაზრდილი თმებისგან. კანი ყოველ დღე გლუვი და ჯანსაღი დარჩება.',
-      image:    null
-    },
-
-    /* ── 8. Image: smooth skin close-up ──────────────────── */
-    {
+      id:      'shv_img_02',
       type:    'image-section',
-      src:     null,
-      alt:     'გლუვი კანი გაპარსვის შემდეგ — ნულოვანი გაღიზიანება, ანტიალერგიული ეფექტი',
-      caption: null
+      order:   6,
+      enabled: true,
+      content: {
+        alt:     'კომფორტული გაპარსვა — შავლეგო სახმარებლად',
+        caption: null,
+      },
+      media: {
+        image: null,   /* → lifestyle / in-use photo */
+      },
+      config: {},
     },
 
-    /* ── 9. Pain-solution #2 ──────────────────────────────── */
+    /* 07 — Pain / solution 1 ────────────────────────────── */
     {
-      type:     'pain-solution',
-      question: 'სამსახურში გაგვიანდება, წვერის გაპარსვა კი ყოველ დილას დროს გჭამს?',
-      answer:   'შავლეგო 5-ჯერ უფრო სწრაფად პარსავს, ვიდრე ჩვეულებრივი სამართებელი. მიიღე სუფთა, პროფესიონალური შედეგი მხოლოდ 90 წამში — ყოველთვის დროულად!',
-      image:    null
+      id:      'shv_ps_01',
+      type:    'pain-solution',
+      order:   7,
+      enabled: true,
+      content: {
+        question: '😩 გაპარსვის შემდეგ გწვა და ახასიათებს გამოწითლება?',
+        answer:   'შავლეგოს 5 თავაკი ამცირებს სიხშირეს — ნაკლები გადასვლა, ნაკლები გაღიზიანება. ალოე ვერა კი კანს მყისიერ სიმშვიდეს ანიჭებს.',
+      },
+      media: { image: null },
+      config: {},
     },
 
-    /* ── 10. Pain-solution #3 ─────────────────────────────── */
+    /* 08 — Pain / solution 2 ────────────────────────────── */
     {
-      type:     'pain-solution',
-      question: 'ხშირად მიემგზავრები და ძველი, მოუხერხებელი საპარსი გიშლის ხელს?',
-      answer:   'შავლეგო უსადენო, წყალგამძლე და კომპაქტურია. ჩადე ჩანთაში და გაიპარსე სადაც გინდა — სასტუმრო, სპორტდარბაზი, ნებისმიერი ადგილი.',
-      image:    null
+      id:      'shv_ps_02',
+      type:    'pain-solution',
+      order:   8,
+      enabled: true,
+      content: {
+        question: '💸 ფულს ხარჯავ სალონზე რეგულარულად?',
+        answer:   '99₾-ით — ერთი საათობრივი ვიზიტის ფასად — ხარისხიანი გაპარსვა სახლში შეგიძლია. ყოველ კვირა, ყოველ დღე.',
+      },
+      media: { image: null },
+      config: {},
     },
 
-    /* ── 11. Image: product in travel bag ─────────────────── */
+    /* 09 — Benefits grid ────────────────────────────────── */
     {
-      type:    'image-section',
-      src:     null,
-      alt:     'შავლეგო მოგზაურობის ჩანთაში — კომპაქტური, ნებისმიერ ადგილას',
-      caption: null
+      id:      'shv_benefits',
+      type:    'benefits-grid',
+      order:   9,
+      enabled: true,
+      content: {
+        title: 'რას იღებ 99₾-ად',
+        items: [
+          { number: '5X',  title: 'უფრო სუფთა კვეთა',     text: '5 თავაკი ერთდროულად — ტყვია-გამტარი სიზუსტე' },
+          { number: '3×',  title: 'ნაკლები გაღიზიანება',  text: 'ხახვი მინიმალური — კანი ბედნიერი' },
+          { number: '21+', title: 'დღე ერთ შაშხანაზე',    text: 'სამ კვირამდე ეკონომიური გამოყენება' },
+          { number: '0',   title: 'ვიზიტი სალონში',       text: 'სახლიდან გაუსვლელად — პროფესიული შედეგი' },
+        ],
+      },
+      media: {},
+      config: {},
     },
 
-    /* ── 12. Text section: ergonomic ──────────────────────── */
+    /* 10 — CTA 2 ────────────────────────────────────────── */
     {
-      type:  'text-section',
-      title: 'ერგონომიული დიზაინი — 3-ჯერ მეტი კონტროლი',
-      body:  'შავლეგოს ხელსაჭიდი შექმნილია შენი ხელისთვის. ერგონომიული ფორმა 3-ჯერ მეტ კონტროლს გაძლევს ჩვეულებრივ საპარსთან შედარებით — ზუსტი და კომფორტული გაპარსვა ყოველ ჯერზე.',
-      align: 'left'
-    },
-
-    /* ── 13. Image: ergonomic grip ────────────────────────── */
-    {
-      type:    'image-section',
-      src:     null,
-      alt:     'ხელი შავლეგოს ხელსაჭიდზე — ერგონომიული ფორმა, 3-ჯერ მეტი კონტროლი',
-      caption: null
-    },
-
-    /* ── 14. CTA #2 ───────────────────────────────────────── */
-    {
+      id:      'shv_cta_02',
       type:    'cta',
-      label:   'შეუკვეთე შავლეგო — 99₾',
-      anchor:  '#order-form',
-      subtext: 'შეზღუდული მარაგი — ნუ გამოტოვებ'
+      order:   10,
+      enabled: true,
+      content: {
+        label:   '🎯 ახლავე შეუკვეთე',
+        anchor:  '#order-form',
+        subtext: 'მარაგი შეზღუდულია — ნუ გადადებ',
+      },
+      media: {},
+      config: {},
     },
 
-    /* ── 15. Pain-solution #4 ─────────────────────────────── */
+    /* 11 — Product image 3 (detail / blades) ────────────── */
     {
-      type:     'pain-solution',
-      question: 'ყოველ 2 კვირაში თმა გეზრდება, სალონში სიარული კი ძვირი ჯდება?',
-      answer:   'შავლეგო იდეალურია თმის შეჭრისთვისაც. მოქნილი თავაკები სახლიდან გაუსვლელად გაძლევს სალონზე უკეთეს შედეგს — 2-ჯერ სწრაფად.',
-      image:    null
-    },
-
-    /* ── 16. Text section: confident man ─────────────────── */
-    {
-      type:  'text-section',
-      title: 'თავდაჯერებული მამაკაცი — მიმზიდველი მამაკაცი',
-      body:  'შავლეგოს ინოვაციური ანტიალერგიული თავაკები შენს კანს გლუვს, მიმზიდველსა და რბილს ხდის — ეს არის თავდაჯერებულობის საფუძველი, რომელიც ყველა ქალმა იცის.',
-      align: 'center'
-    },
-
-    /* ── 17. Benefits grid ────────────────────────────────── */
-    {
-      type:  'benefits-grid',
-      title: 'პროდუქტის უპირატესობები',
-      items: [
-        { number: '01', title: 'სიჩქარე',      text: 'სრული გაპარსვა 90 წამში.' },
-        { number: '02', title: '2-ში-1',        text: 'წვერი და თმა — ერთი მოწყობილობა.' },
-        { number: '03', title: 'უსაფრთხოება',  text: 'მოქნილი თავაკები, ნულოვანი ნაჭრები.' },
-        { number: '04', title: 'კომფორტი',      text: 'უსადენო, წყალგამძლე, კომპაქტური.' }
-      ]
-    },
-
-    /* ── 18. Image: result — confident man ────────────────── */
-    {
+      id:      'shv_img_03',
       type:    'image-section',
-      src:     null,
-      alt:     'გაპარსვის შედეგი — გლუვი, თავდაჯერებული სახე',
-      caption: null
+      order:   11,
+      enabled: true,
+      content: {
+        alt:     '5 თავაკი ახლოდან — სიმახვილე, რომელიც ჩანს',
+        caption: null,
+      },
+      media: {
+        image: null,   /* → blade detail macro photo */
+      },
+      config: {},
     },
 
-    /* ── 19. CTA #3 ───────────────────────────────────────── */
+    /* 12 — Video ────────────────────────────────────────── */
     {
+      id:      'shv_video',
+      type:    'video-section',
+      order:   12,
+      enabled: true,
+      content: {
+        title: '🎬 ნახე სად განსხვავდება',
+      },
+      media: {
+        video: null,   /* → YouTube/Vimeo embed URL */
+      },
+      config: {},
+    },
+
+    /* 13 — Text section (brand story) ───────────────────── */
+    {
+      id:      'shv_txt_01',
+      type:    'text-section',
+      order:   13,
+      enabled: true,
+      content: {
+        title: 'ჩვენ ვართ შავლეგო',
+        body:  'გაპარსვა არ უნდა ტკიობდეს. ჩვენი 5-თავაკიანი სისტემა შეიქმნა იმ ადამიანებისთვის, ვისთვისაც სიმრბილე ისეთივე მნიშვნელოვანია, როგორც სტილი. ყოველ დილა — შენი.',
+      },
+      media: {},
+      config: { align: null },
+    },
+
+    /* 14 — Pain / solution 3 ────────────────────────────── */
+    {
+      id:      'shv_ps_03',
+      type:    'pain-solution',
+      order:   14,
+      enabled: true,
+      content: {
+        question: '⏰ დრო გიფასდება — გაპარსვაში ტლანქ დრო კარგავ?',
+        answer:   'FlexGlide® ტექნოლოგია კონტურებს ავტომატურად ეგუება — ნაკლები ფრთხილი მოძრაობა, ნაკლები ვარჯიში, სწრაფი შედეგი. სულ 2 წუთი.',
+      },
+      media: { image: null },
+      config: {},
+    },
+
+    /* 15 — Specs list ───────────────────────────────────── */
+    {
+      id:      'shv_specs',
+      type:    'specs-list',
+      order:   15,
+      enabled: true,
+      content: {
+        title: '📋 პარამეტრები',
+        items: [
+          '5 დამოუკიდებლად მოძრავი თავაკი',
+          'ლუბრიკანტის ზოლი — ალოე ვერა + ვიტამინი E',
+          'FlexGlide® სახსარი — სრული კონტური',
+          '3 კვირამდე გამოყენება (1× დღეში)',
+          'ჰიპოალერგიული, მგრძნობ. კანისთვის',
+          'თავსებადი: Gillette Fusion-ის ტიპთან',
+        ],
+      },
+      media: {},
+      config: {},
+    },
+
+    /* 16 — Product image 4 (packaging) ─────────────────── */
+    {
+      id:      'shv_img_04',
+      type:    'image-section',
+      order:   16,
+      enabled: true,
+      content: {
+        alt:     'შავლეგო შეფუთვაში — სუფთა, სასაჩუქრე ვარიანტი',
+        caption: null,
+      },
+      media: {
+        image: null,   /* → packaging / gift shot */
+      },
+      config: {},
+    },
+
+    /* 17 — Pain / solution 4 ────────────────────────────── */
+    {
+      id:      'shv_ps_04',
+      type:    'pain-solution',
+      order:   17,
+      enabled: true,
+      content: {
+        question: '🤔 გიჭირს სწორი სამართებელის არჩევა?',
+        answer:   'შავლეგო Gillette Fusion-ის ტიპთან თავსებადია — უკვე გაქვს ყველაფერი, რაც საჭიროა. უბრალოდ გამოიცვალე თავაკი.',
+      },
+      media: { image: null },
+      config: {},
+    },
+
+    /* 18 — Testimonials ─────────────────────────────────── */
+    {
+      id:      'shv_reviews',
+      type:    'testimonials',
+      order:   18,
+      enabled: true,
+      content: {
+        title: '⭐ ნამდვილი მომხმარებლები',
+        items: [
+          {
+            text:   'პირველი გამოყენებიდანვე შეიგრძნობა განსხვავება. კანი არ გწვავს, არ წითლდება.',
+            author: 'გ. ბ., თბილისი',
+            rating: 5,
+          },
+          {
+            text:   'სამ კვირაში ჯერ გამოცვლა არ დამჭირვებია. ეკონომიური და ეფექტური.',
+            author: 'ლ. კ., ბათუმი',
+            rating: 5,
+          },
+          {
+            text:   'ჩუქება ვაჩუქე ქმარს — ეხლა ჩემი ვერ ასვენებს 😄',
+            author: 'ნ. მ., თბილისი',
+            rating: 5,
+          },
+          {
+            text:   'ახლო მეგობარმა ურჩია — ახლა მეც ჩემს მეგობრებს ვურჩევ.',
+            author: 'ვ. დ., ქუთაისი',
+            rating: 5,
+          },
+        ],
+      },
+      media: {},
+      config: {},
+    },
+
+    /* 19 — CTA 3 ────────────────────────────────────────── */
+    {
+      id:      'shv_cta_03',
       type:    'cta',
-      label:   'შეიძინე შავლეგო — 99₾',
-      anchor:  '#order-form',
-      subtext: null
+      order:   19,
+      enabled: true,
+      content: {
+        label:   '🚀 99₾-ად შეკვეთა',
+        anchor:  '#order-form',
+        subtext: 'მიტანა სახლში — სრულიად უფასოდ',
+      },
+      media: {},
+      config: {},
     },
 
-    /* ── 20. Video ────────────────────────────────────────── */
+    /* 20 — Process steps ────────────────────────────────── */
     {
-      type:  'video-section',
-      title: 'ნახე მოქმედებაში',
-      src:   null
+      id:      'shv_steps',
+      type:    'process-steps',
+      order:   20,
+      enabled: true,
+      content: {
+        title: 'შეკვეთა — 3 მარტივი ნაბიჯი',
+        items: [
+          { icon: '📝', title: 'შეავსე ფორმა',      text: 'სახელი და ნომერი — 30 წამი' },
+          { icon: '📞', title: 'გადაგვირეკავთ',      text: 'ვადასტურებთ — სწრაფად და ადვილად' },
+          { icon: '🚚', title: 'მიგიტანთ სახლში',   text: 'მთელ საქართველოში — უფასოდ' },
+        ],
+      },
+      media: {},
+      config: {},
     },
 
-    /* ── 21. Specs ────────────────────────────────────────── */
+    /* 21 — Product image 5 (before/after effect) ────────── */
     {
-      type:  'specs-list',
-      title: 'პროდუქტის მახასიათებლები',
-      items: [
-        'ბატარეის მუშაობის დრო: 200 წუთი ერთ დატენვაზე',
-        'ზომები: 7.62 × 7.62 × 6.35 სმ',
-        'წონა: 209 გ',
-        'მოყვება: შეფუთვის ყუთი + USB დამტენი',
-        'წარმოების ქვეყანა: PRC'
-      ]
+      id:      'shv_img_05',
+      type:    'image-section',
+      order:   21,
+      enabled: true,
+      content: {
+        alt:     'გაპარსვის შედეგი — გლუვი, გაღიზიანების გარეშე',
+        caption: null,
+      },
+      media: {
+        image: null,   /* → result / before-after skin photo */
+      },
+      config: {},
     },
 
-    /* ── 22. Testimonials ─────────────────────────────────── */
+    /* 22 — Text section (guarantee) ─────────────────────── */
     {
-      type:  'testimonials',
-      title: 'მომხმარებელთა გამოხმაურებები',
-      items: [
-        {
-          rating: 5,
-          text:   'საუკეთესო საპარსი, რაც ოდესმე გამომიყენებია. 90 წამი და კანი სრულყოფილად გლუვია. გაღიზიანება სრულად გაქრა.',
-          author: 'დავით მ.'
-        },
-        {
-          rating: 5,
-          text:   'სკეპტიკური ვიყავი, მაგრამ ეს ნამდვილად გასაოცარია. ანტიალერგიული თავაკები სხვაობას ნამდვილად ქმნის — ნულოვანი სიწითლე.',
-          author: 'გიორგი თ.'
-        },
-        {
-          rating: 5,
-          text:   '2-ში-1 ფუნქცია — ნამდვილი აღმოჩენა. ახლა ვიყენებ წვერისა და თმის ორივეს. ყოველ კვირა დრო და ფული მეზოგება.',
-          author: 'ნიკა ბ.'
-        }
-      ]
+      id:      'shv_txt_02',
+      type:    'text-section',
+      order:   22,
+      enabled: true,
+      content: {
+        title: '🛡️ 100% გარანტია',
+        body:  'თუ პირველი გამოყენების შემდეგ კმაყოფილი არ ხარ — ვიბრუნებთ ფულს. კითხვების გარეშე.',
+      },
+      media: {},
+      config: { align: 'center' },
     },
 
-    /* ── 23. Process steps ────────────────────────────────── */
+    /* 23 — CTA 4 (pre-form push) ────────────────────────── */
     {
-      type:  'process-steps',
-      title: 'როგორ ხდება შეკვეთის გაფორმება?',
-      items: [
-        {
-          icon:  '📝',
-          title: 'ავსებ ფორმას',
-          text:  'შეიყვანე შენი სახელი და ტელეფონის ნომერი ქვემოთ მოცემულ ფორმაში.'
-        },
-        {
-          icon:  '📞',
-          title: 'გიკავშირდება ოპერატორი',
-          text:  'ჩვენი მენეჯერი 15 წუთში გიკავშირდება მისამართისა და მიწოდების დროის დასაზუსტებლად.'
-        },
-        {
-          icon:  '🚚',
-          title: 'მოგაქვს შეკვეთა',
-          text:  'შეკვეთას მოგიტანთ სასურველ მისამართზე — მიტანა უფასოა.'
-        },
-        {
-          icon:  '💳',
-          title: 'იხდი მიღებისას',
-          text:  'გადახდა მხოლოდ შეკვეთის მიღების შემდეგ — ქეშით ან ბარათით. წინასწარი გადახდა არ სჭირდება.'
-        }
-      ]
-    },
-
-    /* ── 24. CTA #4 ───────────────────────────────────────── */
-    {
+      id:      'shv_cta_04',
       type:    'cta',
-      label:   'შეკვეთის გაფორმება',
-      anchor:  '#order-form',
-      subtext: null
+      order:   23,
+      enabled: true,
+      content: {
+        label:   '🎁 ახლავე ვუკვეთ — 99₾',
+        anchor:  '#order-form',
+        subtext: 'რამდენიმე ადგილი რჩება — ნუ გაჰყვები',
+      },
+      media: {},
+      config: {},
     },
 
-    /* ── 25. Lead capture form ────────────────────────────── */
+    /* 24 — Product image 6 (social proof / scale) ───────── */
     {
-      type:        'form',
-      id:          'order-form',
-      title:       'შეავსე საკონტაქტო ინფორმაცია',
-      subtitle:    'შეავსე ფორმა და 15 წუთში დაგიკავშირდებით',
-      fields: [
-        { type: 'text', name: 'name',  placeholder: 'შენი სახელი',      required: true, autocomplete: 'name' },
-        { type: 'tel',  name: 'phone', placeholder: 'ტელეფონის ნომერი', required: true, autocomplete: 'tel'  }
-      ],
-      submitLabel: 'შეკვეთის გაფორმება',
-      note:        'გადახდა მხოლოდ შეკვეთის მიღებისას. ქეში ან ბარათი. წინასწარი გადახდა არ სჭირდება.'
+      id:      'shv_img_06',
+      type:    'image-section',
+      order:   24,
+      enabled: true,
+      content: {
+        alt:     'შავლეგო — ათასობით კმაყოფილი მომხმარებელი მთელ საქართველოში',
+        caption: null,
+      },
+      media: {
+        image: null,   /* → social proof / happy customer photo */
+      },
+      config: {},
     },
 
-    /* ── 26. Contact info (replaces callback-cta) ─────────── */
+    /* 25 — Order form ───────────────────────────────────── */
     {
-      type:  'contact-info',
-      title: 'კომპანიის ინფორმაცია',
-      items: [
-        {
-          icon:  '📍',
-          label: 'მისამართი',
-          value: 'საქართველო, თბილისი, რუსთაველის გამზ. 10'
-        },
-        {
-          icon:  '📞',
-          label: 'ცხელი ხაზი',
-          value: '+995 555 79 35 58',
-          href:  'tel:+995555793558'
-        },
-        {
-          icon:  '✉️',
-          label: 'ელ-ფოსტა',
-          value: 'Shavlego.one@gmail.com',
-          href:  'mailto:Shavlego.one@gmail.com'
-        },
-        {
-          icon:  '🌐',
-          label: 'ვებსაიტი',
-          value: 'www.shavlego.one',
-          href:  'https://www.shavlego.one/'
-        }
-      ],
-      links: [
-        { label: 'წესები და პირობები',          href: '#' },
-        { label: 'კონფიდენციალობის პოლიტიკა',  href: '#' },
-        { label: 'კონტაქტი',                    href: 'mailto:Shavlego.one@gmail.com' }
-      ]
-    }
+      id:      'shv_form',
+      type:    'form',
+      order:   25,
+      enabled: true,
+      content: {
+        title:       '📦 შეკვეთის გაფორმება',
+        subtitle:    'შეავსე — გამოგვიკვეთ 15 წუთში',
+        submitLabel: '✅ შეკვეთა — 99₾',
+        note:        '🔒 შენი მონაცემები დაცულია. გარე სერვისებს არ ვუგზავნით.',
+        fields: [
+          {
+            name:         'name',
+            type:         'text',
+            placeholder:  'შენი სახელი',
+            required:     true,
+            autocomplete: 'given-name',
+          },
+          {
+            name:         'phone',
+            type:         'tel',
+            placeholder:  'ტელეფონის ნომერი',
+            required:     true,
+            autocomplete: 'tel',
+          },
+          {
+            name:         'city',
+            type:         'text',
+            placeholder:  'ქალაქი',
+            required:     false,
+            autocomplete: 'address-level2',
+          },
+        ],
+      },
+      media: {},
+      config: {
+        formId: 'order-form',   /* HTML anchor: href="#order-form" → lands here */
+      },
+    },
 
-  ]
-};
+    /* 26 — Contact info ─────────────────────────────────── */
+    {
+      id:      'shv_contact',
+      type:    'contact-info',
+      order:   26,
+      enabled: true,
+      content: {
+        title: 'კომპანიის ინფორმაცია',
+        items: [
+          {
+            icon:  '📍',
+            label: 'მისამართი',
+            value: 'საქართველო, თბილისი, რუსთაველის გამზ. 10',
+            href:  null,
+          },
+          {
+            icon:  '📞',
+            label: 'ცხელი ხაზი',
+            value: '+995 555 79 35 58',
+            href:  'tel:+995555793558',
+          },
+          {
+            icon:  '✉️',
+            label: 'ელ-ფოსტა',
+            value: 'Shavlego.one@gmail.com',
+            href:  'mailto:Shavlego.one@gmail.com',
+          },
+          {
+            icon:  '🌐',
+            label: 'ვებსაიტი',
+            value: 'www.shavlego.one',
+            href:  'https://www.shavlego.one/',
+          },
+        ],
+        links: [
+          { label: 'წესები და პირობები',         href: '#' },
+          { label: 'კონფიდენციალობის პოლიტიკა', href: '#' },
+          { label: 'კონტაქტი',                   href: 'mailto:Shavlego.one@gmail.com' },
+        ],
+      },
+      media: {},
+      config: {},
+    },
+
+  ], /* end blocks */
+
+}; /* end PAGE_DATA */
